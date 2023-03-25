@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Перенаправление всех запросов, кроме запросов к статическим файлам и директориям, на файл index.php в директории public/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [L]
