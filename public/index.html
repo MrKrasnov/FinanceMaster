@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>FinanceMaster</title>
-    <link rel="stylesheet" href="./css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="../vendor/apexcharts/apexcharts.js"></script>
 </head>
 <body>
-
+<main>
+    <div class="container">
+        <nav id="CSV-Graphs">
+            <h1 class="CSV-Graphs-title">Your generated financial statements</h1>
+            <div class="CSV-Graphs-title-btns">
+                <button class="create-new-graph">Create a New Note</button>
+                <button class="Load-graph">Load a Note</button>
+            </div>
+            <ul>
+                <li>{{Some CSV Graph}}</li>
+                <li>{{Some CSV Graph}}</li>
+                <li>{{Some CSV Graph}}</li>
+            </ul>
+        </nav>
+    </div>
+</main>
+<footer>
+    <img src="#" alt="#">
+    Copyright (c) 2023 MrKrasnov/FinanceMaster
+</footer>
 <script src="./js/main.js"></script>
 </body>
 </html>

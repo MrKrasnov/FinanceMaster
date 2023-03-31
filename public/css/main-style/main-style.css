@@ -1,0 +1,31 @@
+html {
+    background-color: var(--footer-bg-color);
+    min-height: 100vh;
+}
+
+body {
+    background-color: var(--footer-bg-color);
+    min-height: 100vh;
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+main {
+    background-color: var(--main-bg-color);
+    font-family: var(--regular-font-family);
+    color: var(--main-text-color);
+    min-height: 93.36vh;
+    height: auto;
+}
+
+footer {
+    display: flex;
+    padding: 15px 0;
+    justify-content: space-around;
+    background-color: var(--footer-bg-color);
+    font-family: var(--light-font-family);
+    color: var(--footer-text-color);
+}

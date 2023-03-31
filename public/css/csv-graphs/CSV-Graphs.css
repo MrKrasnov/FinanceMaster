@@ -1,0 +1,56 @@
+#CSV-Graphs {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.CSV-Graphs-title {
+    padding-bottom: 20px;
+    font-family: var(--bold-font-family);
+    font-size: 24px;
+}
+
+#CSV-Graphs li {
+    margin-top: 10px;
+    padding: 15px 0 15px 0;
+    border-top: 1px solid #d8e0ef;
+    border-right: 1px solid #d8e0ef;
+    border-left: 1px solid #d8e0ef;
+    border-bottom: 5px solid #d8e0ef;
+    font-size: 20px;
+}
+
+#CSV-Graphs li:hover {
+    background: #4c748f;
+    cursor: pointer;
+}
+
+#CSV-Graphs li:active {
+    background: #77a9cb;
+    cursor: pointer;
+}
+
+.CSV-Graphs-title-btns button {
+    width: 150px;
+    height: 50px;
+    margin: 5px;
+    background: #42657c;
+    border: 1px solid #86b6dc;
+    color: var(--button-text-color);
+    font-size: 20px;
+}
+
+.CSV-Graphs-title-btns button:hover {
+    background: #4c748f;
+    cursor: pointer;
+}
+
+.CSV-Graphs-title-btns button:active {
+    background: #77a9cb;
+    cursor: pointer;
+}
+
+.CSV-Graphs-title-btns {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}

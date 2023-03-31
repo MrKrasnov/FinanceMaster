@@ -1,0 +1,14 @@
+:root {
+    /*backgrounds*/
+    --main-bg-color: #0d1117;
+    --footer-bg-color: #161b22;
+    /*fonts*/
+    --main-text-color: #c4c4d5;
+    --button-text-color: #dedee1;
+    --footer-text-color: #d5d3d3;
+    --bold-font-family: "Ubuntu Bold";
+    --regular-font-family: "Ubuntu Regular";
+    --italic-font-family: "Ubuntu Italic";
+    --light-font-family: "Ubuntu Light";
+    --light-italic-font-family: "Ubuntu Light Italic";
+}
