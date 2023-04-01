@@ -1,0 +1,37 @@
+.logo-fm {
+    position: relative;
+}
+
+.logo-fm:before {
+    position: absolute;
+    content: 'Finance';
+    right: 0;
+    animation: logo-animation 2s linear 0s infinite alternate;
+}
+
+.logo-fm:after {
+    position: absolute;
+    content: 'Master';
+    animation: logo-animation 2s linear 0s infinite alternate;
+}
+
+@keyframes logo-animation {
+   10% {
+       text-shadow: none;
+   }
+   40% {
+       text-shadow: -3px 0 red;
+   }
+    70% {
+        text-shadow: -3px 0 blue;
+    }
+    80% {
+        text-shadow: 6px 0 red;
+    }
+    90% {
+        text-shadow: 6px 0 red;
+    }
+    100% {
+        text-shadow: none;
+    }
+}
