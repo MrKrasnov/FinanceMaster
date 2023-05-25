@@ -1,4 +1,13 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /backend.php [L,QSA]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    RewriteCond %{REQUEST_FILENAME}\.php !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^\/public/css/(.*).css
+    RewriteCond %{REQUEST_URI} !^\/public/img/(.*).png
+    RewriteCond %{REQUEST_URI} !^\/public/img/(.*).jpg
+    RewriteCond %{REQUEST_URI} !^\/public/img/svg/(.*).svg
+    RewriteCond %{REQUEST_URI} !^\/public/js/(.*).js
+    RewriteRule ^(.*)$ public/index.php [L,QSA]
+</IfModule>
