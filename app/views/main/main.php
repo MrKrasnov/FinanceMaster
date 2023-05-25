@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>FinanceMaster</title>
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="../vendor/apexcharts/apexcharts.js"></script>
-</head>
-<body>
 <main>
     <div class="container">
         <nav id="CSV-Graphs">
@@ -24,10 +14,3 @@
         </nav>
     </div>
 </main>
-<footer>
-    <div class="logo-fm"></div>
-    Copyright (c) 2023 MrKrasnov/FinanceMaster
-</footer>
-<script src="./js/main.js"></script>
-</body>
-</html>
