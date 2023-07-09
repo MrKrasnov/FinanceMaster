@@ -4,19 +4,31 @@ namespace App\Core;
 
 class View
 {
-    public static string $errorPage = 'customError.php';
-    public static string $layout = 'default';
+    public string $viewPage;
 
-    /**
-     * Render the page for custom error
-     * @param string $msgError
-     * @return void
-     */
-    public static function renderErrorPage(string $msgError) : void
+    public function __construct(string $viewPage)
     {
-        $path = '../app/views/errors/'.self::$errorPage;
-        $title = 'Custom Error';
-        (new self)->renderPage($title, $path);
+        $pathToViewPage = "../app/views/pages/$viewPage.php";
+
+        if (!file_exists($pathToViewPage)) {
+            self::renderErrorCodePage(404);
+        }
+
+        $this->viewPage = $pathToViewPage;
+    }
+
+    public function renderPage(string $title, $vars): void
+    {
+        if (!file_exists($this->viewPage)) {
+            self::renderErrorCodePage(404);
+            exit();
+        }
+
+        ob_start();
+        include $this->viewPage;
+        $content = ob_get_clean();
+        require '../app/views/layouts/default.php';
+        exit();
     }
 
     /**
@@ -26,19 +38,35 @@ class View
      */
     public static function renderErrorCodePage(int $code) : void
     {
-        $path = '../app/views/errors/'.$code.'.php';
-        (new self)->renderPage('error '.$code, $path);
+        $path = "../app/views/errors/$code.php";
+        $title = $code;
+
+        if (!file_exists($path)) {
+            self::renderErrorPage('It\'s error code '.$code.' but not found error page');
+            exit();
+        }
+
+        ob_start();
+        include $path;
+        $content = ob_get_clean();
+        require '../app/views/layouts/default.php';
+        exit();
     }
 
-    private function renderPage(string $title, string $path): void
+    /**
+     * Render the page for custom error
+     * @param string $msgError
+     * @return void
+     */
+    public static function renderErrorPage(string $msgError) : void
     {
-        if (file_exists($path)) {
-            ob_start();
-            include $path;
-            $content = ob_get_clean();
-            require '../app/views/layouts/'.self::$layout.'.php';
-        } else {
-            require '../app/views/errors/unusualError.php';
-        }
+        $path = "../app/views/errors/unusualError.php";
+        $title = "$msgError Error";
+
+        ob_start();
+        include $path;
+        $content = ob_get_clean();
+        require '../app/views/layouts/default.php';
+        exit();
     }
 }

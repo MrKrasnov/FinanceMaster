@@ -5,11 +5,11 @@ namespace App\Core;
 class Router
 {
     protected array $routes = [];
-    protected array $routeArguments = [];
 
     public function __construct()
     {
-        $arr = require '../config/router-paths.php';
+        $arr = require '../app/config/router-paths.php';
+
         foreach ($arr as $key => $val) {
             $this->add($key, $val);
         }
@@ -20,28 +20,34 @@ class Router
         $this->routes[$route] = $params;
     }
 
-    public function match() : bool
-    {
-        $url = trim($_SERVER['REQUEST_URI'], '/');
-        foreach ($this->routes as $routePath => $routeArguments) {
-            if ($routePath === $url) {
-                $this->routeArguments = $routeArguments;
-                return true;
-            }
-        }
-        return false;
-    }
-
     public function run(): void
     {
-        if(!$this->match()) {
-            View::renderErrorCodePage(404);
-        }else{
-            //TODO maybe, i should use try.. catch in this block code
+        //TODO maybe, i should use try.. catch in this block code
+        $controller = $this->getController();
+        $controller->doAction();
+    }
 
-            echo 'О такой путь есть!';
-        }
+    private function getController() : Controller
+    {
+       $url = trim($_SERVER['REQUEST_URI'], "/");
 
+       if(!array_key_exists($url, $this->routes)) {
+           View::renderErrorCodePage(404);
+       }
+
+       $params = $this->routes[$url];
+       $controllerPath = 'App\Controllers\\'.ucfirst($params['controller']);
+
+       if(!class_exists($controllerPath)) {
+           View::renderErrorCodePage(404);
+       }
+
+       return new $controllerPath($params);
+    }
+
+    public static function redirect(string $url) :void
+    {
+        //TODO need redirect
     }
 
 }
