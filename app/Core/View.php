@@ -8,7 +8,7 @@ class View
 
     public function __construct(string $viewPage)
     {
-        $pathToViewPage = "../app/views/pages/$viewPage.php";
+        $pathToViewPage = "./app/views/pages/$viewPage.php";
 
         if (!file_exists($pathToViewPage)) {
             self::renderErrorCodePage(404);
@@ -27,7 +27,7 @@ class View
         ob_start();
         include $this->viewPage;
         $content = ob_get_clean();
-        require '../app/views/layouts/default.php';
+        require './app/views/layouts/default.php';
         exit();
     }
 
@@ -38,7 +38,7 @@ class View
      */
     public static function renderErrorCodePage(int $code) : void
     {
-        $path = "../app/views/errors/$code.php";
+        $path = "./app/views/errors/$code.php";
         $title = $code;
 
         if (!file_exists($path)) {
@@ -49,7 +49,7 @@ class View
         ob_start();
         include $path;
         $content = ob_get_clean();
-        require '../app/views/layouts/default.php';
+        require './app/views/layouts/default.php';
         exit();
     }
 
@@ -60,13 +60,13 @@ class View
      */
     public static function renderErrorPage(string $msgError) : void
     {
-        $path = "../app/views/errors/unusualError.php";
+        $path = "./app/views/errors/unusualError.php";
         $title = "$msgError Error";
 
         ob_start();
         include $path;
         $content = ob_get_clean();
-        require '../app/views/layouts/default.php';
+        require './app/views/layouts/default.php';
         exit();
     }
 }

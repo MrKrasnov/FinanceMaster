@@ -9,5 +9,5 @@
     RewriteCond %{REQUEST_URI} !^\/public/img/(.*).jpg
     RewriteCond %{REQUEST_URI} !^\/public/img/svg/(.*).svg
     RewriteCond %{REQUEST_URI} !^\/public/js/(.*).js
-    RewriteRule ^(.*)$ public/index.php [L,QSA]
+    RewriteRule ^(.*)$ index.php [L,QSA]
 </IfModule>

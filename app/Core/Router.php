@@ -8,7 +8,7 @@ class Router
 
     public function __construct()
     {
-        $arr = require '../app/config/router-paths.php';
+        $arr = require './app/config/router-paths.php';
 
         foreach ($arr as $key => $val) {
             $this->add($key, $val);
@@ -22,6 +22,12 @@ class Router
 
     public function run(): void
     {
+        $url = trim($_SERVER['REQUEST_URI'], "/");
+
+        if($url !== "authentication" && !$this->checkAuth() ) { //TODO checkCookiesAuth
+            self::redirect("/authentication");
+        }
+
         //TODO maybe, i should use try.. catch in this block code
         $controller = $this->getController();
         $controller->doAction();
@@ -47,7 +53,14 @@ class Router
 
     public static function redirect(string $url) :void
     {
-        //TODO need redirect
+        header('location: '.$url);
+        exit;
     }
 
+    public function checkAuth() : bool
+    {
+        //TODO checkCookiesAuth
+        return false;
+        return true;
+    }
 }

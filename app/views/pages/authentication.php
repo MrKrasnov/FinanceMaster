@@ -1,0 +1,3 @@
+<main>
+Auth form
+</main>
