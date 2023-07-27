@@ -14,5 +14,12 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+      "ext-pdo": "*"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    }
 }

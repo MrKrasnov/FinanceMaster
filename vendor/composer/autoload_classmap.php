@@ -6,10 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Controllers\\Index' => $baseDir . '/app/Controllers/Index.php',
-    'App\\Core\\Controller' => $baseDir . '/app/Core/Controller.php',
-    'App\\Core\\Model' => $baseDir . '/app/Core/Model.php',
-    'App\\Core\\Router' => $baseDir . '/app/Core/Router.php',
-    'App\\Core\\View' => $baseDir . '/app/Core/View.php',
+    'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );
