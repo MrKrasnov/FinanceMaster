@@ -12,7 +12,7 @@ abstract class Controller
         $this->model = $this->loadModel($route['controller']);
     }
 
-    abstract public function doAction();
+    abstract public function doAction(Validate $validate);
 
     public function loadModel($name) : Model
     {

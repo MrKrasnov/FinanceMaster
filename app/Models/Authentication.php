@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Authentication extends \App\Core\Model
+use App\Core\Model;
+
+class Authentication extends Model
 {
 
 }

@@ -3,10 +3,11 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Validate;
 
 class Index extends Controller
 {
-    public function doAction()
+    public function doAction(Validate $validate)
     {
         $result = $this->model->getFinansesIndex();
 

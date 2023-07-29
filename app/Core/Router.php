@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use ReflectionClass;
+
 class Router
 {
     protected array $routes = [];
@@ -24,13 +26,13 @@ class Router
     {
         $url = trim($_SERVER['REQUEST_URI'], "/");
 
-        if($url !== "authentication" && !$this->checkAuth() ) { //TODO checkCookiesAuth
+        if($url !== "authentication" && !$this->checkAuth() ) { // TODO checkCookiesAuth
             self::redirect("/authentication");
         }
 
-        //TODO maybe, i should use try.. catch in this block code
         $controller = $this->getController();
-        $controller->doAction();
+        $validateClass = new ReflectionClass( "App\Validators\\".ucfirst($url).'Validate');
+        $controller->doAction($validateClass->newInstance());
     }
 
     private function getController() : Controller
