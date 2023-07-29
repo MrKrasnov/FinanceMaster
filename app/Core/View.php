@@ -11,6 +11,7 @@ class View
         $pathToViewPage = "./app/views/pages/$viewPage.php";
 
         if (!file_exists($pathToViewPage)) {
+            Log::writeLog('Error: Don\'t found page'.$pathToViewPage);
             self::renderErrorCodePage(404);
         }
 
@@ -20,6 +21,7 @@ class View
     public function renderPage(string $title, $vars): void
     {
         if (!file_exists($this->viewPage)) {
+            Log::writeLog('Error: Don\'t found page'.$this->viewPage);
             self::renderErrorCodePage(404);
             exit();
         }
@@ -39,9 +41,10 @@ class View
     public static function renderErrorCodePage(int $code) : void
     {
         $path = "./app/views/errors/$code.php";
-        $title = $code;
+        $title = $code . ' Error';
 
         if (!file_exists($path)) {
+            Log::writeLog('Error: Don\'t found error page');
             self::renderErrorPage('It\'s error code '.$code.' but not found error page');
             exit();
         }
