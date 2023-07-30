@@ -2,10 +2,9 @@
 
 namespace App\Validators;
 
-use App\Core\Validate;
-
-class AuthenticationValidate extends Validate
+class RegistrationValidate extends \App\Core\Validate
 {
+
     public function validate()
     {
         if(!$this->isPOSTrequest()) {

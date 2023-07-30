@@ -2,8 +2,12 @@
 
 namespace App\Core;
 
+use ReflectionClass;
+
 abstract class Validate
 {
+    abstract public function validate();
+
     public function isGETrequest() : bool
     {
         return $_SERVER['REQUEST_METHOD'] === 'GET';
@@ -13,5 +17,7 @@ abstract class Validate
     {
         return $_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST);
     }
+
+
 
 }

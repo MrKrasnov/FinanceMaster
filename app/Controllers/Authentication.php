@@ -3,18 +3,38 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
-use App\Core\Log;
-use App\Core\Validate;
-use App\Core\View;
+use App\Requests\AuthenticationRequest;
+use App\Requests\RegistrationRequest;
 
 class Authentication extends Controller
 {
-    public function actionIndex(Validate $validate)
+    public function actionIndex()
     {
-        if(!$validate->validateRequest()) {
-            Log::writeLog('Error: 400 Bad Request');
-            View::renderErrorCodePage(400);
-        }
+        $vars = [
+        ];
+
+        $this->view->renderPage('Authentication Form', $vars);
+    }
+
+    public function actionAuthentication(AuthenticationRequest $request)
+    {
+//        if(!$validate->validateAuthenticationRequest()) {
+//            Log::writeLog('Error: 400 Bad Request');
+//            View::renderErrorCodePage(400);
+//        }
+
+        $vars = [
+        ];
+
+        $this->view->renderPage('Authentication Form', $vars);
+    }
+
+    public function actionRegistration(RegistrationRequest $request)
+    {
+//        if(!$validate->validateRegistrationRequest()) {
+//            Log::writeLog('Error: 400 Bad Request');
+//            View::renderErrorCodePage(400);
+//        }
 
         $vars = [
         ];

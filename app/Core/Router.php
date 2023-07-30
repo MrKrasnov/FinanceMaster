@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Core;
 
-use ReflectionClass;
+namespace App\Core;
 
 class Router
 {
@@ -31,20 +30,20 @@ class Router
         }
 
         $urlArr = explode('/' , $url);
-        $mainUrl= $urlArr[0];
-        $method = $urlArr[1] ?? 'index';
-        $method = 'action' . ucfirst($method);
+        $controllerName   = $urlArr[0];
+        $controllerMethod = $urlArr[1] ?? 'index';
+        $controllerMethod = 'action' . ucfirst($controllerMethod);
 
-        $controller = $this->getController($mainUrl);
+        $requestClass = Request::getValidRequest($controllerName , $controllerMethod);
 
-        try{
-            $validateClass = new ReflectionClass( "App\Validators\\".ucfirst($mainUrl).'Validate');
-        }  catch (\ReflectionException $e) {
-            Log::writeLog('Don\'t found a validator class with the help the ReflectionClass');
-            $controller->$method();
+        $controller = $this->getController($controllerName );
+
+        if(isset($requestClass)) {
+            $controller->$controllerMethod($requestClass);
+        } else {
+            $controller->$controllerMethod();
         }
 
-        $controller->$method($validateClass->newInstance());
     }
 
     private function getController(string $mainUrl) : Controller
