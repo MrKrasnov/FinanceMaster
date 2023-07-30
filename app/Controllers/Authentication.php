@@ -9,7 +9,7 @@ use App\Core\View;
 
 class Authentication extends Controller
 {
-    public function doAction(Validate $validate)
+    public function actionIndex(Validate $validate)
     {
         if(!$validate->validateRequest()) {
             Log::writeLog('Error: 400 Bad Request');

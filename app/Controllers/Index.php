@@ -7,7 +7,7 @@ use App\Core\Validate;
 
 class Index extends Controller
 {
-    public function doAction(Validate $validate)
+    public function actionIndex()
     {
         $result = $this->model->getFinansesIndex();
 

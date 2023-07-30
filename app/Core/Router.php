@@ -26,24 +26,34 @@ class Router
     {
         $url = trim($_SERVER['REQUEST_URI'], "/");
 
-        if($url !== "authentication" && !$this->checkAuth() ) { // TODO checkCookiesAuth
+        if($url !== "authentication" && !$this->checkAuth()) { // TODO checkCookiesAuth
             self::redirect("/authentication");
         }
 
-        $controller = $this->getController();
-        $validateClass = new ReflectionClass( "App\Validators\\".ucfirst($url).'Validate');
-        $controller->doAction($validateClass->newInstance());
+        $urlArr = explode('/' , $url);
+        $mainUrl= $urlArr[0];
+        $method = $urlArr[1] ?? 'index';
+        $method = 'action' . ucfirst($method);
+
+        $controller = $this->getController($mainUrl);
+
+        try{
+            $validateClass = new ReflectionClass( "App\Validators\\".ucfirst($mainUrl).'Validate');
+        }  catch (\ReflectionException $e) {
+            Log::writeLog('Don\'t found a validator class with the help the ReflectionClass');
+            $controller->$method();
+        }
+
+        $controller->$method($validateClass->newInstance());
     }
 
-    private function getController() : Controller
+    private function getController(string $mainUrl) : Controller
     {
-       $url = trim($_SERVER['REQUEST_URI'], "/");
-
-       if(!array_key_exists($url, $this->routes)) {
+       if(!array_key_exists($mainUrl, $this->routes)) {
            View::renderErrorCodePage(404);
        }
 
-       $params = $this->routes[$url];
+       $params = $this->routes[$mainUrl];
        $controllerPath = 'App\Controllers\\'.ucfirst($params['controller']);
 
        if(!class_exists($controllerPath)) {
