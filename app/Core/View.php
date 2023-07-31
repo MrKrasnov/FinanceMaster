@@ -18,7 +18,7 @@ class View
         $this->viewPage = $pathToViewPage;
     }
 
-    public function renderPage(string $title, $vars): void
+    public function renderPage(string $title, Model $model): void
     {
         if (!file_exists($this->viewPage)) {
             Log::writeLog('Error: Don\'t found page'.$this->viewPage);

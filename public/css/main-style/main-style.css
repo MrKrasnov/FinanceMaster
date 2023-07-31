@@ -8,11 +8,6 @@ body {
     min-height: 100vh;
 }
 
-.container {
-    width: 95%;
-    margin: 0 auto;
-}
-
 main {
     background-color: var(--main-bg-color);
     font-family: var(--regular-font-family);
@@ -28,4 +23,22 @@ footer {
     background-color: var(--footer-bg-color);
     font-family: var(--light-font-family);
     color: var(--footer-text-color);
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.container-tiny {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
 }

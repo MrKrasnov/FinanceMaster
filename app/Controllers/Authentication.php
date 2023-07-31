@@ -10,10 +10,7 @@ class Authentication extends Controller
 {
     public function actionIndex()
     {
-        $vars = [
-        ];
-
-        $this->view->renderPage('Authentication Form', $vars);
+        $this->view->renderPage('Authentication Form', new \App\Models\Authentication());
     }
 
     public function actionAuthentication(AuthenticationRequest $request)
