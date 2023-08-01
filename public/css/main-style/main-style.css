@@ -1,22 +1,23 @@
-html {
-    background-color: var(--footer-bg-color);
-    min-height: 100vh;
-}
-
 body {
-    background-color: var(--footer-bg-color);
+    margin: 0;
+    padding: 0;
+    position: relative;
     min-height: 100vh;
+    background-color: var(--body-bg-color);
 }
 
 main {
     background-color: var(--main-bg-color);
     font-family: var(--regular-font-family);
     color: var(--main-text-color);
-    min-height: 93.36vh;
+    min-height: 100vh;
     height: auto;
 }
 
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     display: flex;
     padding: 15px 0;
     justify-content: space-around;

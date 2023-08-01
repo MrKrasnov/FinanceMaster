@@ -1,7 +1,8 @@
 :root {
     /*backgrounds*/
-    --main-bg-color: #0d1117;
-    --footer-bg-color: #161b22;
+    --main-bg-color: #f4f4f4;
+    --body-bg-color: #e1e0e1;
+    --footer-bg-color: #5d5d5d;
     /*fonts*/
     --main-text-color: #c4c4d5;
     --button-text-color: #dedee1;
