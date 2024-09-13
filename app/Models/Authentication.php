@@ -11,12 +11,15 @@ class Authentication extends Model
     public function __construct()
     {
         parent::__construct();
-        //$this->generateCSRFToken(); //TODO need create
-        //$this->csrfToken = $_SESSION['csrf_token'];
+
+        $this->generateCSRFToken();
     }
 
     private function generateCSRFToken()
     {
-        //TODO need create
+        if (!isset($_SESSION['csrf_token'])){
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        $this->csrfToken = $_SESSION['csrf_token'];
     }
 }
