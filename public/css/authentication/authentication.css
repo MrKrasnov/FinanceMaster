@@ -1,7 +1,89 @@
-.authentication-input {
+.flex-container-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    font-family: var(--regular-font-family), sans-serif;
+}
+
+.container {
+    background: #fff;
+
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+    width: 300px;
+    margin: 0 auto 0 auto;
+
+    padding: 20px
+}
+
+.form-container {
+    text-align: center;
+}
+
+.switch-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.switch-buttons button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: var(--regular-font-family), sans-serif;
+    color: var(--main-text-light-color);
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.switch-buttons button.active {
+    border-bottom: 2px solid var(--btn-bg-color);
+    color: var(--btn-bg-color);
+}
+
+.form {
+    display: none;
+    animation: fadeIn 0.5s ease;
+    color: var(--main-text-light-color);
+}
+
+.form.active {
     display: block;
 }
 
-.authentication-flex>div{
-    margin: 20% 5% 0 5%;
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    background: var(--btn-bg-color);
+    color: var(--main-text-color);
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: var(--regular-font-family), sans-serif;
+}
+
+button[type="submit"]:hover {
+    background: var(--btn-bg-active);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
