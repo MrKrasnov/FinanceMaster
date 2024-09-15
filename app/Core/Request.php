@@ -40,8 +40,6 @@ abstract class Request
                     break;
                 }
             }
-            // TODO valide
-
             $request->doValidate();
             $request->setRequestParams();
         } catch (\ReflectionException $e) {
