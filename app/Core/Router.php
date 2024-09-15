@@ -38,7 +38,7 @@ class Router
 
         $controller = $this->getController($controllerName );
 
-        if(isset($requestClass)) {
+        if(isset($requestClass)) { //If there is a request class
             $controller->$controllerMethod($requestClass);
         } else {
             $controller->$controllerMethod();
