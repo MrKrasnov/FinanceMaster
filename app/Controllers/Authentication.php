@@ -15,28 +15,17 @@ class Authentication extends Controller
 
     public function actionAuthentication(AuthenticationRequest $request)
     {
-//        if(!$validate->validateAuthenticationRequest()) {
-//            Log::writeLog('Error: 400 Bad Request');
-//            View::renderErrorCodePage(400);
-//        }
-
         $vars = [
         ];
 
-        $this->view->renderPage('Authentication Form', $vars);
+        $this->view->renderPage('Authentication Form', new \App\Models\Authentication());
     }
 
     public function actionRegistration(RegistrationRequest $request)
     {
-        //TODO проделать регистрацию.
-//        if(!$validate->validateRegistrationRequest()) {
-//            Log::writeLog('Error: 400 Bad Request');
-//            View::renderErrorCodePage(400);
-//        }
-
         $vars = [
         ];
 
-        $this->view->renderPage('Authentication Form', $vars);
+        $this->view->renderPage('Authentication Form', new \App\Models\Authentication());
     }
 }
