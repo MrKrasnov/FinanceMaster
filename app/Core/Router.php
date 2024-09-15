@@ -25,7 +25,7 @@ class Router
     {
         $url = trim($_SERVER['REQUEST_URI'], "/");
 
-        if($url !== "authentication" && !$this->checkAuth()) { // TODO checkCookiesAuth
+        if(!str_contains($url, 'authentication') && !$this->checkAuth()) { // TODO checkCookiesAuth
             self::redirect("/authentication");
         }
 

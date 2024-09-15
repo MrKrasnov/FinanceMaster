@@ -28,6 +28,7 @@ class Authentication extends Controller
 
     public function actionRegistration(RegistrationRequest $request)
     {
+        //TODO проделать регистрацию.
 //        if(!$validate->validateRegistrationRequest()) {
 //            Log::writeLog('Error: 400 Bad Request');
 //            View::renderErrorCodePage(400);
