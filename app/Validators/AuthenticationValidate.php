@@ -6,7 +6,7 @@ use App\Core\Validate;
 
 class AuthenticationValidate extends Validate
 {
-    public function validate()
+    public function validate() : bool
     {
         if(!$this->isPOSTrequest()) {
             return false;

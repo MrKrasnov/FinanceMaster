@@ -2,11 +2,16 @@
 
 namespace App\Core;
 
+use App\Exceptions\ValidationException;
 use ReflectionClass;
 
 abstract class Request
 {
     abstract public function setRequestParams() : void;
+    /**
+     * @throws ValidationException
+     */
+    public function doValidate(): void{}
 
     public static function getValidRequest(string $class, string $method) : ?Request
     {
@@ -14,8 +19,8 @@ abstract class Request
         $request = null;
 
         try{
-            $validateClass      = new ReflectionClass( 'App\Controllers\\'.ucfirst($class));
-            $reflectionMethod   = $validateClass->getMethod($method);
+            $controllerClass    = new ReflectionClass( 'App\Controllers\\'.ucfirst($class));
+            $reflectionMethod   = $controllerClass->getMethod($method);
             $parameters         = $reflectionMethod->getParameters();
 
             if(empty($parameters)) {
@@ -35,11 +40,16 @@ abstract class Request
                     break;
                 }
             }
+            // TODO valide
 
+            $request->doValidate();
             $request->setRequestParams();
-        }  catch (\ReflectionException $e) {
+        } catch (\ReflectionException $e) {
             Log::writeLog('Don\'t found a request class with the help the ReflectionClass' . PHP_EOL . $e->getMessage());
             View::renderErrorCodePage(500);
+        } catch (ValidationException $e) {
+            Log::writeLog($e->getMessage());
+            View::renderErrorCodePage($e->getCode());
         }
 
         return $request;
