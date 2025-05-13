@@ -2,12 +2,14 @@
     RewriteEngine On
     RewriteBase /
 
-    RewriteCond %{REQUEST_FILENAME}\.php !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} !^\/public/css/(.*).css
-    RewriteCond %{REQUEST_URI} !^\/public/img/(.*).png
-    RewriteCond %{REQUEST_URI} !^\/public/img/(.*).jpg
-    RewriteCond %{REQUEST_URI} !^\/public/img/svg/(.*).svg
-    RewriteCond %{REQUEST_URI} !^\/public/js/(.*).js
-    RewriteRule ^(.*)$ index.php [L,QSA]
+    # Excluding requests to existing files and directories
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Excluding static files (CSS, JS, fonts, images, and others)
+    RewriteCond %{REQUEST_URI} !\.(css|js|gif|jpe?g|png|svg|woff2?|eot|ttf|otf|mp4|webp|ico|webm|ogg|mp3|json|xml)$ [NC]
+
+    # Redirecting all other requests to index.php
+    RewriteRule ^ index.php [L,QSA]
 </IfModule>
