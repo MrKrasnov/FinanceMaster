@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    working_dir: .
     ports:
       - "8080:80"
     volumes:
