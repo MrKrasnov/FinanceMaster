@@ -8,13 +8,6 @@ services:
       - .:/var/www/html
     depends_on:
       - db
-    environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_NAME}
-      DB_USERNAME: ${DB_USER}
-      DB_PASSWORD: ${DB_PASS}
-
   db:
     image: mysql:8.4.5
     environment:
