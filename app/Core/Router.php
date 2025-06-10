@@ -21,8 +21,10 @@ class Router
         $this->routes[$route] = $params;
     }
 
-    public function run($url): void
+    public function run($urlParam): void
     {
+        $url = trim($urlParam, "/");
+
         if(!str_contains($url, 'authentication') && !$this->checkAuth()) { // TODO checkCookiesAuth
             self::redirect("/authentication");
         }

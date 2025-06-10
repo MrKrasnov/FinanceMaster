@@ -12,8 +12,7 @@ $dotenv->load();
 
 try {
     $router = new Router();
-    $url = trim($_SERVER['REQUEST_URI'], "/");
-    $router->run($url);
+    $router->run(REQUEST_URI);
 } catch (Exception $error) {
     Log::writeLog($error->getMessage());
 }
