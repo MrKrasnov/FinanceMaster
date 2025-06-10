@@ -8,8 +8,8 @@
         echo $title;
         ?>
     </title>
-    <link rel="stylesheet" href="./public/css/reset.css">
-    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <link href="./public/img/favicon.ico" rel="icon" type="image/x-icon" />
     <script src="./vendor/apexcharts/apexcharts.js"></script>
 <body>
