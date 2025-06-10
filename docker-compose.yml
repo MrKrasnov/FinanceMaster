@@ -1,6 +1,9 @@
 services:
   app:
     build: .
+    container_name: finanse-master-php-container
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     working_dir: /var/www/html/
     ports:
       - "8080:80"
