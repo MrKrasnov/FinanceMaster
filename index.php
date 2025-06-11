@@ -16,7 +16,3 @@ try {
 } catch (Exception $error) {
     Log::writeLog($error->getMessage());
 }
-
-
-
-
