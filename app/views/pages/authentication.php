@@ -20,10 +20,10 @@ use App\Models\Authentication;
                 <form id="registerForm" class="form">
                     <h2>Sign Up</h2>
                     <input type="hidden" name="token" value="<?= $model->csrfToken ?>">
-                    <input type="text" placeholder="Login" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
-                    <input type="password" placeholder="Repeat Password" required>
+                    <input type="text" name="login" placeholder="Login" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="repeat-password" placeholder="Repeat Password" required>
                     <button type="submit">Register</button>
                 </form>
             </div>
