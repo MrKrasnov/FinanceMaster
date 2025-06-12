@@ -11,14 +11,12 @@ use App\Models\Authentication;
             </div>
             <div id="forms">
                 <form id="loginForm" class="form active">
-                    <h2>Sign In</h2>
                     <input type="hidden" name="token" value="<?= $model->csrfToken ?>">
                     <input type="text" placeholder="Login or Email" required>
                     <input type="password" placeholder="Password" required>
                     <button type="submit">Login</button>
                 </form>
                 <form id="registerForm" class="form">
-                    <h2>Sign Up</h2>
                     <input type="hidden" name="token" value="<?= $model->csrfToken ?>">
                     <input type="text" name="login" placeholder="Login" required>
                     <input type="email" name="email" placeholder="Email" required>
