@@ -23,6 +23,7 @@ use App\Models\Authentication;
                     <input type="text" placeholder="Login" required>
                     <input type="email" placeholder="Email" required>
                     <input type="password" placeholder="Password" required>
+                    <input type="password" placeholder="Repeat Password" required>
                     <button type="submit">Register</button>
                 </form>
             </div>
