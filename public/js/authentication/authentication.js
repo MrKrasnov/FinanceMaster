@@ -27,7 +27,27 @@ registerForm.addEventListener('submit', function (event) {
        return;
    }
 
-   //TODO: send post request
+    fetch('/authentication/registration', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert("Registration successful!");
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Something went wrong during registration.");
+        });
 });
 
 function openLoginForm() {
