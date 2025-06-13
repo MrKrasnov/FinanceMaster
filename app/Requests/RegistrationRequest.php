@@ -4,31 +4,22 @@ namespace App\Requests;
 
 use App\Core\Request;
 use App\Exceptions\ValidationException;
-use App\Validators\AuthenticationValidate;
-use App\Core\ContentType;
+use App\Validators\RegistrationValidate;
 
 class RegistrationRequest extends Request
 {
     private string $login;
     private string $email;
     private string $password;
-    private string $repeatPassword;
 
-    /**
-     * @throws ValidationException
-     */
-    public function setRequestParams(ContentType $contentType): void
+    public function setRequestParams(): void
     {
-        if($contentType === ContentType::FormData) {
-            $this->setCsrfToken($_POST["token"])
-                 ->setLogin($_POST["login"])
-                 ->setEmail($_POST["email"])
-                 ->setPassword($_POST["password"])
-                 ->setRepeatPassword($_POST["repeat-password"]);
-            return;
-        }
+        extract($_POST);
 
-        throw new ValidationException("Unsupported Content-Type " . $contentType->value . " for Registration form");
+        $this->setCsrfToken($token)
+             ->setLogin($login)
+             ->setEmail($email)
+             ->setPassword($password);
     }
 
     /**
@@ -36,7 +27,7 @@ class RegistrationRequest extends Request
      */
     public  function doValidate() : void
     {
-        $resultValidate = (new AuthenticationValidate())->validate();
+        $resultValidate = (new RegistrationValidate())->validate();
 
         if(!$resultValidate) {
             throw new ValidationException('Validation failed');
@@ -86,17 +77,6 @@ class RegistrationRequest extends Request
     public function setPassword(string $password): RegistrationRequest
     {
         $this->password = trim($password);
-        return $this;
-    }
-
-    public function getRepeatPassword(): string
-    {
-        return $this->repeatPassword;
-    }
-
-    public function setRepeatPassword(string $repeatPassword): RegistrationRequest
-    {
-        $this->repeatPassword = trim($repeatPassword);
         return $this;
     }
 }

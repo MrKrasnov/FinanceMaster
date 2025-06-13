@@ -7,7 +7,7 @@ use ReflectionClass;
 
 abstract class Request
 {
-    abstract public function setRequestParams(ContentType $contentType) : void;
+    abstract public function setRequestParams() : void;
     /**
      * @throws ValidationException
      */
@@ -41,8 +41,8 @@ abstract class Request
                 }
             }
 
-            $request->setRequestParams(ContentType::fromServer());
             $request->doValidate();
+            $request->setRequestParams();
         } catch (\ReflectionException $e) {
             Log::writeLog('Don\'t found a request class with the help the ReflectionClass' . PHP_EOL . $e->getMessage());
             View::renderErrorCodePage(500);

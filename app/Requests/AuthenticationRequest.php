@@ -5,11 +5,10 @@ namespace App\Requests;
 use App\Core\Request;
 use App\Exceptions\ValidationException;
 use App\Validators\AuthenticationValidate;
-use App\Core\ContentType;
 
 class AuthenticationRequest extends Request
 {
-    public function setRequestParams(ContentType $contentType): void
+    public function setRequestParams(): void
     {
         // TODO: Implement setRequestParams() method.
     }
