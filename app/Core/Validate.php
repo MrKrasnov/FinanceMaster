@@ -15,7 +15,11 @@ abstract class Validate
      */
     public function isGETrequest() : bool
     {
-        return RequestMethod::fromServer() === RequestMethod::Get;
+        if (RequestMethod::fromServer() === RequestMethod::Get) {
+            return true;
+        }
+
+        throw new ValidationException("Invalid request method. GET required.");
     }
 
     /**
@@ -23,7 +27,11 @@ abstract class Validate
      */
     public function isPOSTrequest() : bool
     {
-        return RequestMethod::fromServer() === RequestMethod::Post && !empty($_POST);
+        if (RequestMethod::fromServer() === RequestMethod::Post && !empty($_POST)) {
+            return true;
+        }
+
+        throw new ValidationException("Invalid request method. POST required.");
     }
 
     /**
@@ -31,18 +39,23 @@ abstract class Validate
      */
     public function isFormDataContentType() : bool
     {
-        return ContentType::fromServer() === ContentType::FormData;
+        if (ContentType::fromServer() === ContentType::FormData) {
+            return true;
+        }
+
+        throw new ValidationException("Invalid Content-Type. Expected 'multipart/form-data'.");
     }
 
     /**
      * @param array<string> $requiredFields
      * @return bool
+     * @throws ValidationException
      */
     function isNotEmptyPostFields(array $requiredFields) : bool
     {
         foreach ($requiredFields as $field) {
-            if (empty(trim($_POST[$field] ?? ''))) {
-                return false;
+            if (!empty(trim($_POST[$field] ?? ''))) {
+                throw new ValidationException("Field '$field' is missing or empty.");
             }
         }
         return true;
