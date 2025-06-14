@@ -34,20 +34,29 @@ registerForm.addEventListener('submit', function (event) {
             'Accept': 'application/json'
         }
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+        .then(async response => {
+            const text = await response.text();
+            let data;
+
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                // console.error("Server did not return valid JSON:", text); //for debug!
+                throw new Error("Invalid JSON from server");
             }
-            return response.json();
-        })
-        .then(data => {
-            alert("Registration successful!");
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Unknown server error');
+            }
+
             console.log(data);
+            alert("Registration successful!");
         })
         .catch(error => {
             console.error('Error:', error);
             alert("Something went wrong during registration.");
         });
+
 });
 
 function openLoginForm() {
