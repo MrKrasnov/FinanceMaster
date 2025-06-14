@@ -54,7 +54,7 @@ abstract class Validate
     function isNotEmptyPostFields(array $requiredFields) : bool
     {
         foreach ($requiredFields as $field) {
-            if (!empty(trim($_POST[$field] ?? ''))) {
+            if (empty(trim($_POST[$field] ?? ''))) { 
                 throw new ValidationException("Field '$field' is missing or empty.");
             }
         }

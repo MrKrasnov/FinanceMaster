@@ -72,4 +72,27 @@ class View
         require './app/views/layouts/default.php';
         exit();
     }
+
+    /**
+     * Render the json response for code error
+     * @param int $code
+     * @param string $msgError
+     * @return void
+     */
+    public static function renderJsonForErrorCode(int $code, string $msgError) : void
+    {
+        if (ob_get_length()) {
+            ob_clean();
+        }
+
+        http_response_code($code);
+
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            'success' => false,
+            'error' => $msgError
+        ]);
+        exit();
+    }
 }
