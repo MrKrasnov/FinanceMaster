@@ -8,6 +8,7 @@ class Authentication extends Model
 {
     public string $csrfToken;
     public string $csrfTokenExpire;
+    public string $csrfTokenNameKey = "csrf_token";
 
     public function __construct()
     {

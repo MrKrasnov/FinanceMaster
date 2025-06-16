@@ -1,4 +1,5 @@
 <?php
+session_start();
 include __DIR__."/app/config/const.php";
 
 use App\Core\Log;

@@ -50,7 +50,7 @@ abstract class Validate
     /**
      * @throws ValidationException
      */
-    function isJsonAcceptType() : bool
+    public function isJsonAcceptType() : bool
     {
         if (AcceptType::fromServer() === AcceptType::Json) {
             return true;
@@ -64,13 +64,35 @@ abstract class Validate
      * @return bool
      * @throws ValidationException
      */
-    function isNotEmptyPostFields(array $requiredFields) : bool
+    public function isNotEmptyPostFields(array $requiredFields) : bool
     {
         foreach ($requiredFields as $field) {
             if (empty(trim($_POST[$field] ?? ''))) { 
                 throw new ValidationException("Field '$field' is missing or empty.");
             }
         }
+        return true;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function validateCSRFToken(): bool
+    {
+        //Parameter names are used in a specialized service, so they must not differ
+        if (empty($_POST['csrf_token']) || empty($_SESSION['csrf_token']) || empty($_SESSION['csrf_token_expire'])
+        ) {
+            throw new ValidationException("Missing CSRF token or expiration parameters");
+        }
+
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            throw new ValidationException("Invalid CSRF token");
+        }
+
+        if (time() > $_SESSION['csrf_token_expire']) {
+            throw new ValidationException("Expired CSRF token");
+        }
+
         return true;
     }
 }

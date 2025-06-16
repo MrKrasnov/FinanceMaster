@@ -24,7 +24,11 @@ class RegistrationValidate extends \App\Core\Validate
             return false;
         }
 
-        $requiredFields = ['token', 'login', 'email', 'password', 'repeat-password'];
+        if(!$this->validateCSRFToken()) {
+            return false;
+        }
+
+        $requiredFields = ['login', 'email', 'password', 'repeat-password'];
 
         if (!$this->isNotEmptyPostFields($requiredFields)) {
             return false;
