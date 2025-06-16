@@ -96,7 +96,7 @@ class View
         exit();
     }
 
-    public function renderJsonResponse(array $data) : void
+    public function renderJsonResponse(Model $data) : void
     {
         if (ob_get_length()) {
             ob_clean();

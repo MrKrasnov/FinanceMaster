@@ -23,9 +23,8 @@ class Authentication extends Controller
 
     public function actionRegistration(RegistrationRequest $request)
     {
-        $vars = [
-        ];
+        $model = new \App\Models\Authentication();
 
-        $this->view->renderPage('Authentication Form', new \App\Models\Authentication());
+        $this->view->renderJsonResponse($model);
     }
 }
