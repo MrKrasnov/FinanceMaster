@@ -16,8 +16,7 @@ class RegistrationRequest extends Request
     {
         extract($_POST);
 
-        $this->setCsrfToken($token)
-             ->setLogin($login)
+        $this->setLogin($login)
              ->setEmail($email)
              ->setPassword($password);
     }
@@ -32,19 +31,6 @@ class RegistrationRequest extends Request
         if(!$resultValidate) {
             throw new ValidationException('Validation failed');
         }
-    }
-
-    private string $csrfToken;
-
-    public function getCsrfToken(): string
-    {
-        return $this->csrfToken;
-    }
-
-    public function setCsrfToken(string $csrfToken): RegistrationRequest
-    {
-        $this->csrfToken = trim($csrfToken);
-        return $this;
     }
 
     public function getLogin(): string
