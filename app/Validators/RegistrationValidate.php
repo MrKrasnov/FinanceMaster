@@ -20,6 +20,10 @@ class RegistrationValidate extends \App\Core\Validate
             return false;
         }
 
+        if(!$this->isJsonAcceptType()) {
+            return false;
+        }
+
         $requiredFields = ['token', 'login', 'email', 'password', 'repeat-password'];
 
         if (!$this->isNotEmptyPostFields($requiredFields)) {

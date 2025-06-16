@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Core\Enum\AcceptType;
 use App\Core\Enum\ContentType;
 use App\Core\Enum\RequestMethod;
 use App\Exceptions\ValidationException;
@@ -44,6 +45,18 @@ abstract class Validate
         }
 
         throw new ValidationException("Invalid Content-Type. Expected 'multipart/form-data'.");
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    function isJsonAcceptType() : bool
+    {
+        if (AcceptType::fromServer() === AcceptType::Json) {
+            return true;
+        }
+
+        throw new ValidationException("Invalid Accept-Type. Expected 'application/json'.");
     }
 
     /**
