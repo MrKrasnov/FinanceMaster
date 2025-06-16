@@ -95,4 +95,19 @@ class View
         ]);
         exit();
     }
+
+    public function renderJsonResponse(array $data) : void
+    {
+        if (ob_get_length()) {
+            ob_clean();
+        }
+
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            'success' => true,
+            'data' => $data
+        ]);
+        exit();
+    }
 }
