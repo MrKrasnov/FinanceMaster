@@ -25,7 +25,8 @@ class Authentication extends Controller
     public function actionRegistration(RegistrationRequest $request)
     {
         $model = new \App\Models\Authentication();
+        $data   = $model->registrationProcess();
 
-        $this->view->renderJsonResponse([]);
+        $this->view->renderJsonResponse($data);
     }
 }

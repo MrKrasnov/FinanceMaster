@@ -20,4 +20,11 @@ class Authentication extends Model
 
         return ["csrfTokenManager" => $csrfTokenManager];
     }
+
+    public function registrationProcess() : array
+    {
+        //TODO: set user in the database.
+
+        return [];
+    }
 }
