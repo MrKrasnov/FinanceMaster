@@ -18,13 +18,15 @@ class View
         $this->viewPage = $pathToViewPage;
     }
 
-    public function renderPage(string $title, Model $model): void
+    public function renderPage(string $title, array $data): void
     {
         if (!file_exists($this->viewPage)) {
             Log::writeLog('Error: Don\'t found page'.$this->viewPage);
             self::renderErrorCodePage(404);
             exit();
         }
+
+        extract($data);
 
         ob_start();
         include $this->viewPage;
@@ -96,7 +98,7 @@ class View
         exit();
     }
 
-    public function renderJsonResponse(Model $data) : void
+    public function renderJsonResponse(array $data) : void
     {
         if (ob_get_length()) {
             ob_clean();

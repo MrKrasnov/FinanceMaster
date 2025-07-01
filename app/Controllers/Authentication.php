@@ -10,7 +10,8 @@ class Authentication extends Controller
 {
     public function actionIndex()
     {
-        $this->view->renderPage('Authentication Form', new \App\Models\Authentication());
+        $model = new \App\Models\Authentication();
+        $this->view->renderPage('Authentication Form', $model->getFormData());
     }
 
     public function actionAuthentication(AuthenticationRequest $request)
@@ -18,13 +19,13 @@ class Authentication extends Controller
         $vars = [
         ];
 
-        $this->view->renderPage('Authentication Form', new \App\Models\Authentication());
+        $this->view->renderPage('Authentication Form', []);
     }
 
     public function actionRegistration(RegistrationRequest $request)
     {
         $model = new \App\Models\Authentication();
 
-        $this->view->renderJsonResponse($model);
+        $this->view->renderJsonResponse([]);
     }
 }

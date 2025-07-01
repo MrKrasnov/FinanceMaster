@@ -73,26 +73,4 @@ abstract class Validate
         }
         return true;
     }
-
-    /**
-     * @throws ValidationException
-     */
-    public function validateCSRFToken(): bool
-    {
-        //Parameter names are used in a specialized service, so they must not differ
-        if (empty($_POST['csrf_token']) || empty($_SESSION['csrf_token']) || empty($_SESSION['csrf_token_expire'])
-        ) {
-            throw new ValidationException("Missing CSRF token or expiration parameters");
-        }
-
-        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-            throw new ValidationException("Invalid CSRF token");
-        }
-
-        if (time() > $_SESSION['csrf_token_expire']) {
-            throw new ValidationException("Expired CSRF token");
-        }
-
-        return true;
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Validators;
 
+use App\Core\Manager\CsrfTokenManager;
 use App\Exceptions\ValidationException;
 
 class RegistrationValidate extends \App\Core\Validate
@@ -24,7 +25,7 @@ class RegistrationValidate extends \App\Core\Validate
             return false;
         }
 
-        if(!$this->validateCSRFToken()) {
+        if(!CsrfTokenManager::validateCSRFToken()) {
             return false;
         }
 

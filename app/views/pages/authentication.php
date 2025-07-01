@@ -1,6 +1,6 @@
 <?php
 use App\Models\Authentication;
-/** @var Authentication $model */
+/** @var \App\Core\Manager\CsrfTokenManager $csrfTokenManager */
 ?>
 <div class="flex-container-form">
     <div class="container">
@@ -11,13 +11,13 @@ use App\Models\Authentication;
             </div>
             <div id="forms">
                 <form id="loginForm" class="form active">
-                    <input type="hidden" name="<?= $model->csrfTokenNameKey ?>" value="<?= $model->csrfToken ?>">
+                    <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
                     <input type="text" placeholder="Login or Email" required>
                     <input type="password" placeholder="Password" required>
                     <button type="submit">Login</button>
                 </form>
                 <form id="registerForm" class="form">
-                    <input type="hidden" name="<?= $model->csrfTokenNameKey ?>" value="<?= $model->csrfToken ?>">
+                    <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
                     <input type="text" name="login" placeholder="Login" required>
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
