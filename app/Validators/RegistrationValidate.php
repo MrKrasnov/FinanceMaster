@@ -35,6 +35,8 @@ class RegistrationValidate extends \App\Core\Validate
             return false;
         }
 
+        //TODO: set limit length for email and login
+
         if($_POST['password'] !== $_POST['repeat-password']) {
             return false;
         }

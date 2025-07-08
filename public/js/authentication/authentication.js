@@ -27,6 +27,8 @@ registerForm.addEventListener('submit', function (event) {
        return;
    }
 
+    //TODO: set limit length for email and login
+
     fetch('/authentication/registration', {
         method: 'POST',
         body: formData,
