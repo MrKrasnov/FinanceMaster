@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
+use App\Requests\RegistrationRequest;
+use App\Services\UserManagement\UserManagement;
 
 class Authentication extends Model
 {
@@ -21,10 +23,10 @@ class Authentication extends Model
         return ["csrfTokenManager" => $csrfTokenManager];
     }
 
-    public function registrationProcess() : array
+    public function registrationProcess(RegistrationRequest $request) : array
     {
-        //TODO: set user in the database.
-
+        $userManagement = new UserManagement();
+        $userManagement->registration($request->getLogin(), $request->getEmail(), $request->getPassword());
         return [];
     }
 }
