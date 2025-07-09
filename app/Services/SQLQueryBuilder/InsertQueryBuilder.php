@@ -4,7 +4,7 @@ namespace App\Services\SQLQueryBuilder;
 
 use PDO;
 
-class InsertQueryBuilder extends QueryBuilder
+final class InsertQueryBuilder extends QueryBuilder
 {
     public function insertInto(string $table): self
     {
