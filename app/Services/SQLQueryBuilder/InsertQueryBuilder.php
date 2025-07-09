@@ -4,12 +4,8 @@ namespace App\Services\SQLQueryBuilder;
 
 use PDO;
 
-class InsertQueryBuilder
+class InsertQueryBuilder extends QueryBuilder
 {
-    private string $query;
-    private array $params = [];
-    private int $paramCounter = 0;
-
     public function insertInto(string $table): self
     {
         $this->query = "INSERT INTO $table";
@@ -38,10 +34,5 @@ class InsertQueryBuilder
     {
         $stmt = $pdo->prepare($this->query);
         return $stmt->execute($this->params);
-    }
-
-    private function generateParamName(): string
-    {
-        return ':param_' . $this->paramCounter++;
     }
 }
