@@ -37,17 +37,27 @@ class CsrfTokenManager
         //Parameter names are used in a specialized service, so they must not differ
         if (empty($_POST['csrf_token']) || empty($_SESSION['csrf_token']) || empty($_SESSION['csrf_token_expire'])
         ) {
+            self::destroy_session();
             throw new ValidationException("Missing CSRF token or expiration parameters");
         }
 
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            self::destroy_session();
             throw new ValidationException("Invalid CSRF token");
         }
 
         if (time() > $_SESSION['csrf_token_expire']) {
+            self::destroy_session();
             throw new ValidationException("Expired CSRF token");
         }
 
         return true;
+    }
+
+    private static function destroy_session() : void
+    {
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
     }
 }
