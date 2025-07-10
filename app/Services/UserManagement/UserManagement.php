@@ -6,6 +6,7 @@ use App\Core\DB;
 use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
+use Exception;
 use PDO;
 
 class UserManagement
@@ -18,10 +19,13 @@ class UserManagement
         $this->pdoDB = $db->db;
     }
 
-    public function registration(string $login, string $email, string $password)
+    /**
+     * @throws Exception
+     */
+    public function registration(string $login, string $email, string $password) : ?User
     {
         if($this->checkUserByEmail($email)) {
-            return;
+            throw new Exception("User with this email already exists.");
         }
 
         $sqlstring = new InsertQueryBuilder();
@@ -33,7 +37,7 @@ class UserManagement
                 'password' => password_hash($password, PASSWORD_DEFAULT)
             ])->execute($this->pdoDB);
 
-        
+        return $this->findUserByEmail($email);
     }
 
     public function findUserByEmail(string $email): ?User

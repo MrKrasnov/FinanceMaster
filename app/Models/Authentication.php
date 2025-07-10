@@ -25,8 +25,16 @@ class Authentication extends Model
 
     public function registrationProcess(RegistrationRequest $request) : array
     {
-        $userManagement = new UserManagement();
-        $userManagement->registration($request->getLogin(), $request->getEmail(), $request->getPassword());
+        try {
+            $userManagement = new UserManagement();
+            $user = $userManagement->registration($request->getLogin(), $request->getEmail(), $request->getPassword());
+            if(!isset($user)) {
+                throw new Exception("User with this email already exists.");
+            }
+        } catch(\Exception $exception) {
+
+        }
+
         return [];
     }
 }
