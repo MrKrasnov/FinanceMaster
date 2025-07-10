@@ -28,6 +28,8 @@ class UserManagement
             throw new DomainException("User with this email already exists.", 409);
         }
 
+        throw new \Exception("dasdas");
+
         $sqlstring = new InsertQueryBuilder();
         $sqlstring
             ->insertInto('users')
@@ -66,7 +68,7 @@ class UserManagement
             ->where(['email'=> $email]);
 
         $result = $selectSql->execute($this->pdoDB);
-        return empty($result);
+        return !empty($result);
     }
 
     private function convertArrayToUser(array $data): User
