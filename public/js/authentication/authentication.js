@@ -56,7 +56,11 @@ registerForm.addEventListener('submit', function (event) {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert("Something went wrong during registration.");
+            if (error.code === 409) {
+                alert(error);
+            } else {
+                alert("Something went wrong during registration.");
+            }
         });
 
 });

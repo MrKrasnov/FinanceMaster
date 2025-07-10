@@ -28,7 +28,9 @@ class UserManagement
             throw new DomainException("User with this email already exists.", 409);
         }
 
-        throw new \Exception("dasdas");
+        if($this->checkUserByLogin($login)) {
+            throw new DomainException("User with this login already exists.", 409);
+        }
 
         $sqlstring = new InsertQueryBuilder();
         $sqlstring
@@ -66,6 +68,18 @@ class UserManagement
             ->select(['email'])
             ->from('users')
             ->where(['email'=> $email]);
+
+        $result = $selectSql->execute($this->pdoDB);
+        return !empty($result);
+    }
+
+    private function checkUserByLogin($login) : Bool
+    {
+        $selectSql = new SelectQueryBuilder();
+        $selectSql
+            ->select(['login'])
+            ->from('users')
+            ->where(['login'=> $login]);
 
         $result = $selectSql->execute($this->pdoDB);
         return !empty($result);
