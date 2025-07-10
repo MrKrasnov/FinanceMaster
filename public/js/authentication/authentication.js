@@ -51,7 +51,11 @@ registerForm.addEventListener('submit', function (event) {
                 throw new Error(data.error || 'Unknown server error');
             }
 
-            console.log(data);
+            openLoginForm()
+            let id = data.data.id ?? null
+            if (id) {
+                console.log('created user: ' + id)
+            }
             alert("Registration successful!");
         })
         .catch(error => {
