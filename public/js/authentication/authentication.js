@@ -7,6 +7,48 @@ document.getElementById('registerBtn').addEventListener('click', function () {
 });
 
 const registerForm = document.getElementById('registerForm');
+const loginForm = document.getElementById('loginForm');
+
+loginForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(loginForm);
+
+    for (const [name, value] of formData.entries()) {
+        if (!value.trim()) {
+            alert(`The field "${name}" is required and cannot be empty.`);
+            return;
+        }
+    }
+
+    fetch('/authentication/authentication', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(async response => {
+            const text = await response.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                throw new Error("Invalid JSON from server");
+            }
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Unknown server error');
+            }
+
+            alert("Login successful!");
+            // TODO: redirect user
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(error.message || "Something went wrong during login.");
+        });
+});
 
 registerForm.addEventListener('submit', function (event) {
     event.preventDefault();

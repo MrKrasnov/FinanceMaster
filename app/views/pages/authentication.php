@@ -12,8 +12,8 @@ use App\Models\Authentication;
             <div id="forms">
                 <form id="loginForm" class="form active">
                     <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
-                    <input type="text" placeholder="Login or Email" required>
-                    <input type="password" placeholder="Password" required>
+                    <input type="text" name="username" placeholder="Login or Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <button type="submit">Login</button>
                 </form>
                 <form id="registerForm" class="form">
