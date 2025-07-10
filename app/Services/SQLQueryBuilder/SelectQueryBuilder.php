@@ -22,7 +22,7 @@ final class SelectQueryBuilder extends QueryBuilder
         return $this;
     }
 
-    //maybe for statistics we need to add more operators, like >, <, >=, <=, !=, etc.
+    //NOTE: maybe for statistics we need to add more operators, like >, <, >=, <=, !=, etc.
     public function where(array $data, $operator = "=") : SelectQueryBuilder
     {
         $clauses = [];
