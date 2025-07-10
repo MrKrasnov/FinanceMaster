@@ -98,12 +98,12 @@ class View
         exit();
     }
 
-    public function renderJsonResponse(array $data) : void
+    public function renderJsonResponse(int $code, array $data) : void
     {
         if (ob_get_length()) {
             ob_clean();
         }
-
+        http_response_code($code);
         header('Content-Type: application/json');
 
         echo json_encode([

@@ -3,8 +3,11 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\View;
 use App\Requests\AuthenticationRequest;
 use App\Requests\RegistrationRequest;
+use DomainException;
+use Exception;
 
 class Authentication extends Controller
 {
@@ -25,8 +28,14 @@ class Authentication extends Controller
     public function actionRegistration(RegistrationRequest $request)
     {
         $model = new \App\Models\Authentication();
-        $data   = $model->registrationProcess($request);
-
-        $this->view->renderJsonResponse($data);
+        try {
+            $idUser = $model->registrationProcess($request);
+            $this->view->renderJsonResponse(201, ['id' => $idUser]);
+        }
+        catch (DomainException $exception) {
+            $this->view->renderJsonForErrorCode($exception->getCode(), $exception->getMessage());
+        } catch (Exception $exception) {
+            $this->view->renderJsonForErrorCode(500, $exception->getMessage());
+        }
     }
 }

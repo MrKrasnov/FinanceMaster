@@ -6,7 +6,7 @@ use App\Core\DB;
 use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
-use Exception;
+use DomainException;
 use PDO;
 
 class UserManagement
@@ -20,12 +20,12 @@ class UserManagement
     }
 
     /**
-     * @throws Exception
+     * @throws DomainException
      */
     public function registration(string $login, string $email, string $password) : ?User
     {
         if($this->checkUserByEmail($email)) {
-            throw new Exception("User with this email already exists.");
+            throw new DomainException("User with this email already exists.", 409);
         }
 
         $sqlstring = new InsertQueryBuilder();

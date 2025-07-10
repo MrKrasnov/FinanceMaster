@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
+use App\Dto\User;
 use App\Requests\RegistrationRequest;
 use App\Services\UserManagement\UserManagement;
+use DomainException;
 
 class Authentication extends Model
 {
@@ -23,18 +25,14 @@ class Authentication extends Model
         return ["csrfTokenManager" => $csrfTokenManager];
     }
 
-    public function registrationProcess(RegistrationRequest $request) : array
+    public function registrationProcess(RegistrationRequest $request) : int
     {
-        try {
-            $userManagement = new UserManagement();
-            $user = $userManagement->registration($request->getLogin(), $request->getEmail(), $request->getPassword());
-            if(!isset($user)) {
-                throw new Exception("User with this email already exists.");
-            }
-        } catch(\Exception $exception) {
-
+        $userManagement = new UserManagement();
+        $user = $userManagement->registration($request->getLogin(), $request->getEmail(), $request->getPassword());
+        if (!isset($user)) {
+            throw new DomainException("Failed to register user", 500);
         }
 
-        return [];
+        return $user->getId();
     }
 }
