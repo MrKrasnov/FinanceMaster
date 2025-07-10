@@ -3,6 +3,7 @@
 namespace App\Services\UserManagement;
 
 use App\Core\DB;
+use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
 use PDO;
@@ -32,8 +33,24 @@ class UserManagement
                 'password' => password_hash($password, PASSWORD_DEFAULT)
             ])->execute($this->pdoDB);
 
-
         
+    }
+
+    public function findUserByEmail(string $email): ?User
+    {
+        $selectSql = new SelectQueryBuilder();
+        $selectSql
+            ->select(['*'])
+            ->from('users')
+            ->where(['email' => $email]);
+
+        $result = $selectSql->execute($this->pdoDB);
+
+        if (!empty($result)) {
+            return $this->convertArrayToUser($result[0]);
+        }
+
+        return null;
     }
 
     private function checkUserByEmail($email) : Bool
@@ -46,5 +63,17 @@ class UserManagement
 
         $result = $selectSql->execute($this->pdoDB);
         return empty($result);
+    }
+
+    private function convertArrayToUser(array $data): User
+    {
+        $user = new User();
+        if (isset($data['id'])) $user->setId((string)$data['id']);
+        if (isset($data['email'])) $user->setEmail($data['email']);
+        if (isset($data['login'])) $user->setLogin($data['login']);
+        if (isset($data['password'])) $user->setPassword($data['password']);
+        if (isset($data['created_at'])) $user->setCreatedAt($data['created_at']);
+        if (isset($data['updated_at'])) $user->setUpdatedAt($data['updated_at']);
+        return $user;
     }
 }
