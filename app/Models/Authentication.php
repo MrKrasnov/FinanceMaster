@@ -15,7 +15,17 @@ class Authentication extends Model
     {
         parent::__construct();
     }
-
+    
+    /**
+     * Provides data required for rendering the registration and login forms on the index page.
+     *
+     * This method is intended to be called when displaying the main authentication page.
+     * It generates and returns CSRF token management data, which should be included in the forms
+     * to protect against CSRF attacks. Use the returned CSRF token manager to embed tokens in your
+     * registration and login forms for secure submissions.
+     *
+     * @return array An array containing the CSRF token manager instance, accessible via the 'csrfTokenManager' key.
+     */
     public function getFormData() : array
     {
         $csrfTokenManager = new CsrfTokenManager();
