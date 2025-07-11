@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
 use App\Dto\User;
+use App\Requests\AuthenticationRequest;
 use App\Requests\RegistrationRequest;
 use App\Services\UserManagement\UserManagement;
 use DomainException;
@@ -33,6 +34,17 @@ class Authentication extends Model
         $csrfTokenManager->generateCSRFTokenLifeExpire();
 
         return ["csrfTokenManager" => $csrfTokenManager];
+    }
+
+    public function loginProcess(AuthenticationRequest $request) : bool
+    {
+        $userManagement = new UserManagement();
+        $result = $userManagement->login($request->getUsername(), $request->getPassword());
+        if (!isset($result)) {
+            throw new DomainException("Failed to login user", 500);
+        }
+
+        return $result;
     }
 
     public function registrationProcess(RegistrationRequest $request) : int

@@ -19,6 +19,12 @@ class UserManagement
         $this->pdoDB = $db->db;
     }
 
+    public function login(string $username, string $password) : bool
+    {
+        //TODO: login auth
+        return false;
+    }
+
     /**
      * @throws DomainException
      */

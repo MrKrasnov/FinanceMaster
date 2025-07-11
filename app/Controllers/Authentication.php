@@ -19,6 +19,9 @@ class Authentication extends Controller
 
     public function actionAuthentication(AuthenticationRequest $request)
     {
+        $model = new \App\Models\Authentication();
+        $model->loginProcess($request);
+
         $vars = [
         ];
 
