@@ -8,9 +8,15 @@ use App\Validators\AuthenticationValidate;
 
 class AuthenticationRequest extends Request
 {
+    private string $username;
+    private string $password;
+
     public function setRequestParams(): void
     {
-        // TODO: Implement setRequestParams() method.
+        extract($_POST);
+
+        $this->setUsername($username)
+             ->setPassword($password);
     }
 
     /**
@@ -23,6 +29,27 @@ class AuthenticationRequest extends Request
         if(!$resultValidate) {
             throw new ValidationException('Validation failed');
         }
+    }
 
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): AuthenticationRequest
+    {
+        $this->username = trim($username);
+        return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): AuthenticationRequest
+    {
+        $this->password = trim($password);
+        return $this;
     }
 }
