@@ -20,7 +20,13 @@ class Authentication extends Controller
     public function actionAuthentication(AuthenticationRequest $request)
     {
         $model = new \App\Models\Authentication();
-        $model->loginProcess($request);
+        try {
+            $model->loginProcess($request);
+        }catch (DomainException $exception) {
+            $this->view->renderJsonForErrorCode($exception->getCode(), $exception->getMessage());
+        } catch (Exception $exception) {
+            $this->view->renderJsonForErrorCode(500, $exception->getMessage());
+        }
 
         $vars = [
         ];

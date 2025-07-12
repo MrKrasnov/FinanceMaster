@@ -40,7 +40,7 @@ class Authentication extends Model
     {
         $userManagement = new UserManagement();
         $result = $userManagement->login($request->getUsername(), $request->getPassword());
-        if (!isset($result)) {
+        if (!$result) {
             throw new DomainException("Failed to login user", 500);
         }
 

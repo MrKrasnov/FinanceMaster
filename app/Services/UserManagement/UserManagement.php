@@ -19,10 +19,24 @@ class UserManagement
         $this->pdoDB = $db->db;
     }
 
+    /**
+     * @throws DomainException
+     */
     public function login(string $username, string $password) : bool
     {
-        //TODO: login auth
-        return false;
+        $userRecord = $this->findUserByUsername($username);
+
+        if(!isset($userRecord)) {
+            throw new DomainException("User with this username not exists.", 409);
+        }
+
+        if(!password_verify($password, $userRecord->getPassword())) {
+            throw new DomainException("Invalid password.", 401);
+        }
+
+        //TODO: save in Session
+
+        return true;
     }
 
     /**
@@ -50,6 +64,45 @@ class UserManagement
         return $this->findUserByEmail($email);
     }
 
+    public function findUserByUsername(string $username) : ?User
+    {
+        $userRecord = null;
+        if(str_contains($username, '@')) {
+            $userRecord = $this->findUserByEmail($username);
+        }
+
+        if(!isset($userRecord)) {
+            $userRecord = $this->findUserByLogin($username);
+        }
+
+        if(!isset($userRecord) && !str_contains($username, '@')) {
+            $userRecord = $this->findUserByEmail($username);
+        }
+
+        return $userRecord;
+    }
+
+    public function findUserByLogin(string $login) : ?User
+    {
+        $selectSql = new SelectQueryBuilder();
+        $selectSql
+            ->select(['*'])
+            ->from('users')
+            ->where(['login' => $login]);
+
+        $result = $selectSql->execute($this->pdoDB);
+
+        if (!empty($result)) {
+            if(count($result) > 1) {
+                //TODO: save log if user record more than 1
+            }
+
+            return $this->convertArrayToUser($result[0]);
+        }
+
+        return null;
+    }
+
     public function findUserByEmail(string $email): ?User
     {
         $selectSql = new SelectQueryBuilder();
@@ -61,6 +114,10 @@ class UserManagement
         $result = $selectSql->execute($this->pdoDB);
 
         if (!empty($result)) {
+            if(count($result) > 1) {
+                //TODO: save log if user record more than 1
+            }
+
             return $this->convertArrayToUser($result[0]);
         }
 
