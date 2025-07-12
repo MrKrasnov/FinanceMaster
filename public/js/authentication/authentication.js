@@ -41,8 +41,7 @@ loginForm.addEventListener('submit', function (event) {
                 throw new Error(data.error || 'Unknown server error');
             }
 
-            alert("Login successful!");
-            // TODO: redirect user
+            window.location.href = '/';
         })
         .catch(error => {
             console.error('Error:', error);
