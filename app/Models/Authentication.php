@@ -44,7 +44,7 @@ class Authentication extends Model
             throw new DomainException("Failed to login user", 500);
         }
 
-        return $result;
+        return true;
     }
 
     public function registrationProcess(RegistrationRequest $request) : int

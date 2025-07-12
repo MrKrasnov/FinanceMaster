@@ -22,16 +22,12 @@ class Authentication extends Controller
         $model = new \App\Models\Authentication();
         try {
             $model->loginProcess($request);
+            $this->view->renderJsonResponse(200, ['success' => true]);
         }catch (DomainException $exception) {
             $this->view->renderJsonForErrorCode($exception->getCode(), $exception->getMessage());
         } catch (Exception $exception) {
             $this->view->renderJsonForErrorCode(500, $exception->getMessage());
         }
-
-        $vars = [
-        ];
-
-        $this->view->renderPage('Authentication Form', []);
     }
 
     public function actionRegistration(RegistrationRequest $request)

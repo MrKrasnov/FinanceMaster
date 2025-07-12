@@ -3,6 +3,7 @@
 namespace App\Services\UserManagement;
 
 use App\Core\DB;
+use App\Core\Manager\SessionTokenManager;
 use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
@@ -34,8 +35,9 @@ class UserManagement
             throw new DomainException("Invalid password.", 401);
         }
 
-        //TODO: save in Session
-
+        //NOTE: in future we will use cookie for auth
+        $session = new SessionTokenManager();
+        $session->login($userRecord->getId(), $userRecord->getLogin());
         return true;
     }
 
