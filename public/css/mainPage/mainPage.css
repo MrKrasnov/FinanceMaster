@@ -1,3 +1,59 @@
+/* User Panel Styles */
+.user-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #42657c;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid #86b6dc;
+    z-index: 1000;
+}
+
+.user-panel .user-greeting {
+    color: var(--button-text-color);
+    font-family: var(--regular-font-family);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.user-panel .logout-btn {
+    background: none;
+    border: none;
+    color: var(--button-text-color);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.user-panel .logout-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-panel .logout-btn:active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.user-panel .settings-hyperlink {
+    color: var(--button-text-color);
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+}
+
+.user-panel .settings-hyperlink:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Existing styles */
 #CSV-Graphs {
     padding: 20px 0;
     text-align: center;
