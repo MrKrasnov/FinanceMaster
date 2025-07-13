@@ -1,6 +1,6 @@
 <?php
 use App\Models\Authentication;
-/** @var Authentication $model */
+/** @var \App\Core\Manager\CsrfTokenManager $csrfTokenManager */
 ?>
 <div class="flex-container-form">
     <div class="container">
@@ -11,18 +11,17 @@ use App\Models\Authentication;
             </div>
             <div id="forms">
                 <form id="loginForm" class="form active">
-                    <h2>Sign In</h2>
-                    <input type="hidden" name="token" value="<?= $model->csrfToken ?>">
-                    <input type="text" placeholder="Login or Email" required>
-                    <input type="password" placeholder="Password" required>
+                    <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
+                    <input type="text" name="username" placeholder="Login or Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <button type="submit">Login</button>
                 </form>
                 <form id="registerForm" class="form">
-                    <h2>Sign Up</h2>
-                    <input type="hidden" name="token" value="<?= $model->csrfToken ?>">
-                    <input type="text" placeholder="Login" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
+                    <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
+                    <input type="text" name="login" placeholder="Login" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="repeat-password" placeholder="Repeat Password" required>
                     <button type="submit">Register</button>
                 </form>
             </div>
@@ -30,18 +29,4 @@ use App\Models\Authentication;
     </div>
 </div>
 
-<script>
-    document.getElementById('loginBtn').addEventListener('click', function () {
-        document.getElementById('loginForm').classList.add('active');
-        document.getElementById('registerForm').classList.remove('active');
-        this.classList.add('active');
-        document.getElementById('registerBtn').classList.remove('active');
-    });
-
-    document.getElementById('registerBtn').addEventListener('click', function () {
-        document.getElementById('registerForm').classList.add('active');
-        document.getElementById('loginForm').classList.remove('active');
-        this.classList.add('active');
-        document.getElementById('loginBtn').classList.remove('active');
-    });
-</script>
+<script src="/public/js/authentication/authentication.js"></script>

@@ -18,13 +18,15 @@ class View
         $this->viewPage = $pathToViewPage;
     }
 
-    public function renderPage(string $title, Model $model): void
+    public function renderPage(string $title, array $data): void
     {
         if (!file_exists($this->viewPage)) {
             Log::writeLog('Error: Don\'t found page'.$this->viewPage);
             self::renderErrorCodePage(404);
             exit();
         }
+
+        extract($data);
 
         ob_start();
         include $this->viewPage;
@@ -70,6 +72,44 @@ class View
         include $path;
         $content = ob_get_clean();
         require './app/views/layouts/default.php';
+        exit();
+    }
+
+    /**
+     * Render the json response for code error
+     * @param int $code
+     * @param string $msgError
+     * @return void
+     */
+    public static function renderJsonForErrorCode(int $code, string $msgError) : void
+    {
+        if (ob_get_length()) {
+            ob_clean();
+        }
+
+        http_response_code($code);
+
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            'success' => false,
+            'error' => $msgError
+        ]);
+        exit();
+    }
+
+    public function renderJsonResponse(int $code, array $data) : void
+    {
+        if (ob_get_length()) {
+            ob_clean();
+        }
+        http_response_code($code);
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            'success' => true,
+            'data' => $data
+        ]);
         exit();
     }
 }

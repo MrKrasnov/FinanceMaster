@@ -3,9 +3,12 @@
 
 namespace App\Core;
 
+use App\Core\Manager\SessionTokenManager;
+
 class Router
 {
     protected array $routes = [];
+    private SessionTokenManager $sessionTokenManager;
 
     public function __construct()
     {
@@ -14,6 +17,9 @@ class Router
         foreach ($arr as $key => $val) {
             $this->add($key, $val);
         }
+
+        $sessionTokenManager = new SessionTokenManager();
+        $this->sessionTokenManager = $sessionTokenManager;
     }
 
     private function add($route, $params) : void
@@ -27,16 +33,18 @@ class Router
 
         if(!str_contains($url, 'authentication') && !$this->checkAuth()) { // TODO checkCookiesAuth
             self::redirect("/authentication");
+        } else if(str_contains($url, 'authentication') && $this->checkAuth()) {
+            self::redirect("/");
         }
 
         $urlArr = explode('/' , $url);
-        $controllerName   = $urlArr[0];
+        $controllerName   = empty($urlArr[0]) ? 'index' : $urlArr[0];
         $controllerMethod = $urlArr[1] ?? 'index';
         $controllerMethod = 'action' . ucfirst($controllerMethod);
 
-        $requestClass = Request::getValidRequest($controllerName , $controllerMethod);
+        $requestClass = Request::getValidRequest($controllerName, $controllerMethod);
 
-        $controller = $this->getController($controllerName );
+        $controller = $this->getController($controllerName);
 
         if(isset($requestClass)) { //If there is a request class
             $controller->$controllerMethod($requestClass);
@@ -68,10 +76,14 @@ class Router
         exit;
     }
 
-    public function checkAuth() : bool
+    private function checkAuth() : bool
     {
-        //TODO checkCookiesAuth
+        if($this->sessionTokenManager->isAuthenticated()) {
+            return true;
+        }
+
+        //NOTE: in future we will use cookie for auth
+        
         return false;
-        return true;
     }
 }
