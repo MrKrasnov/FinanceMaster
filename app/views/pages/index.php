@@ -3,7 +3,9 @@
 ?>
 <main>
     <div class="user-panel">
-        <span class="user-greeting">Hi, <a class="settings-hyperlink" href="#"><?= $login ?></a></span>
+        <span class="user-greeting">Hi,
+            <a class="settings-hyperlink" href="#" title="open settings page"><?= $login ?></a>
+        </span>
         <button class="logout-btn" title="Logout">
             <img src="/public/img/logout-icon.svg" alt="Logout" width="16" height="16">
         </button>
