@@ -10,10 +10,6 @@ class Index extends Controller
     {
         $result = $this->model->getFinansesIndex();
 
-        $vars = [
-            'news' => $result,
-        ];
-
-        $this->view->renderPage('Главная страница', $vars);
+        $this->view->renderPage('Home page', $result);
     }
 }

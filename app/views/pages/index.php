@@ -1,4 +1,8 @@
+<?php
+/** @var string $login */
+?>
 <main>
+    <div><?=$login ?></div>
     <div class="container">
         <nav id="CSV-Graphs">
             <h1 class="CSV-Graphs-title">Your generated financial statements</h1>
