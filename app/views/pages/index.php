@@ -25,3 +25,4 @@
         </nav>
     </div>
 </main>
+<script src="/public/js/home/home.js"></script>
