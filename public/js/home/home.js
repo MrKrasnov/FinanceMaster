@@ -2,6 +2,7 @@ const logoutBtn = document.querySelector(".logout-btn");
 const createNewDashboardBtn = document.querySelector('.create-new-dashboard');
 const popupWindowCreateNewDashboard = document.getElementById("popup-window-create-new-dashboard");
 const popupWindowCreateNewDashboardCross = document.getElementById("popup-window-create-new-dashboard-cross");
+const pushForCreateDashboard = document.getElementById("push-for-create-dashboard");
 
 logoutBtn.addEventListener('click', function (event) {
     event.preventDefault();
@@ -42,4 +43,10 @@ createNewDashboardBtn.addEventListener('click', (e) => {
 popupWindowCreateNewDashboardCross.addEventListener("click", (e) => {
     e.preventDefault();
     popupWindowCreateNewDashboard.classList.add("hidden");
+})
+
+pushForCreateDashboard.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    //TODO: Send form to backend
 })

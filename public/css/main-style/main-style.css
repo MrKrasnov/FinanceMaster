@@ -60,6 +60,14 @@ footer {
     background: var(--popup-bg-color);
 }
 
+.popup-container {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    left: 10%;
+    right: 10%;
+}
+
 .popup-win .cross {
     position: absolute;
     width: 16px;
