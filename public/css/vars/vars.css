@@ -3,8 +3,10 @@
     --main-bg-color: #f4f4f4;
     --body-bg-color: #e1e0e1;
     --footer-bg-color: #5d5d5d;
+    --popup-bg-color: #999696;
     --btn-bg-color: #5d5d5d;
     --btn-bg-active: #7e7d7d;
+    --btn-bg-cross: #ffffff;
     /*fonts*/
     --main-text-color: #c4c4d5;
     --main-text-light-color: #2c2c2c;

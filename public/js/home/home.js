@@ -1,4 +1,7 @@
-let logoutBtn = document.querySelector(".logout-btn");
+const logoutBtn = document.querySelector(".logout-btn");
+const createNewDashboardBtn = document.querySelector('.create-new-dashboard');
+const popupWindowCreateNewDashboard = document.getElementById("popup-window-create-new-dashboard");
+const popupWindowCreateNewDashboardCross = document.getElementById("popup-window-create-new-dashboard-cross");
 
 logoutBtn.addEventListener('click', function (event) {
     event.preventDefault();
@@ -30,3 +33,13 @@ logoutBtn.addEventListener('click', function (event) {
         alert(error.message);
     });
 });
+
+createNewDashboardBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    popupWindowCreateNewDashboard.classList.toggle("hidden");
+})
+
+popupWindowCreateNewDashboardCross.addEventListener("click", (e) => {
+    e.preventDefault();
+    popupWindowCreateNewDashboard.classList.add("hidden");
+})
