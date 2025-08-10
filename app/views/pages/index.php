@@ -1,5 +1,7 @@
 <?php
-/** @var string $login */
+/** @var string $login
+ *  @var \App\Core\Manager\CsrfTokenManager $csrfTokenManager
+ * */
 ?>
 <main>
     <!-- user panel-->
@@ -17,9 +19,13 @@
         <div class="cross" id="popup-window-create-new-dashboard-cross">X</div>
         <div class="popup-container" style="padding-top: 50px">
             <h2>Form create new dashboard</h2>
-            <input type="text" name="title" placeholder="Title: Super dashboard family finance" maxlength="30">
-            <input type="text" name="description" placeholder="Description: + cash + cash + cash = more cash hahaha :)" maxlength="100">
-            <button id="push-for-create-dashboard">Push for create</button>
+            <form id="createDashboardForm">
+                <input type="text" name="title" placeholder="Title: Super dashboard family finance" maxlength="30">
+                <input type="text" name="description" placeholder="Description: + cash + cash + cash = more cash hahaha :)" maxlength="100">
+                <input type="hidden" name="owner" value="<?= $login ?>">
+                <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
+                <button type="submit" id="push-for-create-dashboard">Push for create</button>
+            </form>
         </div>
     </div>
 
