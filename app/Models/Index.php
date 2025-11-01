@@ -28,6 +28,9 @@ class Index extends Model
         $userManager->logout();
     }
 
+    /**
+     * @throws \Exception
+     */
     public function createDashboard(CreateDashboardRequest $request) : int
     {
         $userManager = new UserManagement();
