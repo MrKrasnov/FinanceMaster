@@ -20,7 +20,8 @@ class UserManagement
         $this->pdoDB = $db->db;
     }
 
-    public function logout() {
+    public function logout(): void
+    {
         //Note: in future we will use cookie for auth 
         $session = new SessionTokenManager();
         $session->logout();

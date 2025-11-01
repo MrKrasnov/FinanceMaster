@@ -32,9 +32,8 @@ class Authentication extends Controller
 
     public function actionRegistration(RegistrationRequest $request)
     {
-        $model = new \App\Models\Authentication();
         try {
-            $idUser = $model->registrationProcess($request);
+            $idUser = $this->model->registrationProcess($request);
             $this->view->renderJsonResponse(201, ['id' => $idUser]);
         }
         catch (DomainException $exception) {

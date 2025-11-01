@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
+    height: 100%;
     min-height: 100vh;
     background-color: var(--body-bg-color);
 }
@@ -42,4 +43,44 @@ footer {
 
 .justify-content-center {
     justify-content: center;
+}
+
+.absolute-center {
+    width: 55%;
+    height: 75vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.popup-win {
+    border-radius: 10px;
+    background: var(--popup-bg-color);
+}
+
+.popup-container {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    left: 10%;
+    right: 10%;
+}
+
+.popup-win .cross {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background-color: var(--btn-bg-cross);
+    border-radius: 2px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
 }
