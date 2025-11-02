@@ -4,7 +4,6 @@ namespace App\Requests;
 
 use App\Core\Request;
 use App\Exceptions\ValidationException;
-use App\Models\Dashboard;
 use App\Validators\DashboardValidate;
 
 class DashboardRequest extends Request
