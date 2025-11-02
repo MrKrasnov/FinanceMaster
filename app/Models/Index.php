@@ -24,12 +24,11 @@ class Index extends Model
         $user = $userManager->findUserByUsername($login);
 
         if (!isset($user)) {
-            throw new DomainException("Owner not exist - usename: ". $login, 500);
+            throw new DomainException("User not exist - usename: ". $login, 500);
         }
 
         $finanseDashboardManagement = new FinanseDashboardManagement();
         $dashboards = $finanseDashboardManagement->findDashboardsByUserId($user->getId());
-
 
         return ['login' => $login, "csrfTokenManager" => $csrfTokenManager, "dashboards" => array_reverse($dashboards)];
     }
