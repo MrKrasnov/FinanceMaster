@@ -33,7 +33,11 @@ final class SelectQueryBuilder extends QueryBuilder
         }
         $whereClause = implode(' AND ', $clauses);
 
-        $this->query .= " WHERE $whereClause";
+        if(!str_contains($this->query, "WHERE")){
+            $this->query .= " WHERE $whereClause";
+        } else {
+            $this->query .= " AND $whereClause";
+        }
 
         return $this;
     }
