@@ -53,4 +53,5 @@
         </nav>
     </div>
 </main>
+<script src="/public/js/main.js"></script>
 <script src="/public/js/home/home.js"></script>
