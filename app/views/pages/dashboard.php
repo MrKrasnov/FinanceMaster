@@ -12,7 +12,8 @@ use App\Dto\User;
 <main>
     <div class="user-panel">
         <span class="user-greeting">Hi,
-            <a class="settings-hyperlink" href="#" title="open settings page"><?= $user->getLogin() ?></a>
+            <a class="settings-hyperlink" href="#" title="open settings page"><?= $user->getLogin() ?></a> <br>
+            Role: <?=$role->name?>
         </span>
         <button class="logout-btn" title="Logout">
             <img src="/public/img/logout-icon.svg" alt="Logout" width="16" height="16">

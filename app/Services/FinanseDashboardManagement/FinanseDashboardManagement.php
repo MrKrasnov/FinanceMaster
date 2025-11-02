@@ -142,7 +142,7 @@ class FinanseDashboardManagement
                 throw new Exception("error write dashboard $title");
             }
 
-            $memberId = $this->_createMember($dashboardId, $owner);
+            $memberId = $this->_createMember($dashboardId, $owner, 0);
 
             if($memberId === false) {
                 throw new Exception("error write members for dashboard $title");
@@ -179,7 +179,7 @@ class FinanseDashboardManagement
      * @param User $owner
      * @return false|string
      */
-    private function _createMember(string $dashboardId, User $owner): string|false
+    private function _createMember(string $dashboardId, User $owner, int $role_id): string|false
     {
         $insertSqlMember = new InsertQueryBuilder();
 
@@ -188,7 +188,7 @@ class FinanseDashboardManagement
             ->setValues([
                 'board_id' => $dashboardId,
                 'user_id' => $owner->getId(),
-                'role_id' => 1
+                'role_id' => $role_id
             ]);
 
         $result = $insertSqlMember->execute($this->pdoDB);
