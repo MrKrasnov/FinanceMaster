@@ -24,7 +24,7 @@ class Index extends Model
         $user = $userManager->findUserByUsername($login);
 
         if (!isset($user)) {
-            throw new DomainException("User not exist - usename: ". $login, 500);
+            throw new DomainException("User not exist - username: ". $login, 500);
         }
 
         $finanseDashboardManagement = new FinanseDashboardManagement();
@@ -48,7 +48,7 @@ class Index extends Model
         $owner = $userManager->findUserByUsername($request->getUsername());
 
         if (!isset($owner)) {
-            throw new DomainException("Owner not exist - usename: ". $request->getUsername(), 500);
+            throw new DomainException("Owner not exist - username: ". $request->getUsername(), 500);
         }
 
         $finanseDashboardManagement = new FinanseDashboardManagement();
