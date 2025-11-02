@@ -23,6 +23,36 @@
     color: var(--main-text-color);
 }
 
+.insert-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.insert-btn {
+    background: #42657c;
+    border: 1px solid #86b6dc;
+    border-radius: 8px;
+    padding: 12px 24px;
+    color: var(--button-text-color);
+    font-family: var(--regular-font-family);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.insert-btn:hover {
+    background: #4a7289;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.insert-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* User Panel Styles */
 .user-panel {
     position: fixed;

@@ -26,6 +26,10 @@ use App\Dto\User;
             <p class="dashboard-description"><?= htmlspecialchars($dashboard->getDescription()) ?></p>
         </div>
 
+        <div class="insert-button-container">
+            <button class="insert-btn">Insert</button>
+        </div>
+
         <div class="financial-summary">
             <div class="summary-card total-income">
                 <div class="summary-label">INCOME</div>
