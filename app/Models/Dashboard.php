@@ -12,14 +12,13 @@ class Dashboard extends Model
     public function getDashboardIndex(DashboardRequest $request) : array
     {
         $finanseDashboardManagement = new FinanseDashboardManagement();
-        $dashboards = $finanseDashboardManagement->findDashboardById($request->getDashboardId());
+        $dashboard = $finanseDashboardManagement->findDashboardById($request->getDashboardId());
 
         $userManager = new UserManagement();
         $user = $userManager->findUserByUsername($request->getLogin());
 
-        //TODO: get role user
-        // if not role need throw error
+        $roleUser = $finanseDashboardManagement->findRoleUser($user->getId(), $dashboard->getId());
 
-        return [];
+        return ["dashboard" => $dashboard, "user" => $user, "role" => $roleUser];
     }
 }
