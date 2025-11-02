@@ -78,8 +78,8 @@ class FinanseDashboardManagement
     }
 
     /**
-     * @param int $id
-     * @return array<Dashboard>|null
+     * @param array $ids
+     * @return array<Dashboard>
      */
     public function findDashboardByIds(array $ids): array
     {
