@@ -3,6 +3,14 @@ const createNewDashboardBtn = document.querySelector('.create-new-dashboard');
 const popupWindowCreateNewDashboard = document.getElementById("popup-window-create-new-dashboard");
 const popupWindowCreateNewDashboardCross = document.getElementById("popup-window-create-new-dashboard-cross");
 const createDashboardForm = document.getElementById("createDashboardForm");
+const dashboardsCell = document.querySelectorAll('.dashboard-cell');
+
+dashboardsCell.forEach(dashboardCell => {
+    dashboardCell.addEventListener('click', () => {
+        const dashboard_id = dashboardCell.dataset.index
+        window.location.href = "/dashboard?dashboard_id=" + dashboard_id
+    });
+})
 
 logoutBtn.addEventListener('click', function (event) {
     event.preventDefault();

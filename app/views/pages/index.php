@@ -39,10 +39,11 @@
             <ul>
                 <?php
                 foreach($dashboards as $dashboard){
+                    $dashboardId = $dashboard->getId();
                     $dashboardTitle = $dashboard->getTitle();
                     $dashboardDescription = $dashboard->getDescription();
                     echo
-                    "<li>
+                    "<li class='dashboard-cell' data-index='$dashboardId'>
                         <p>Title: $dashboardTitle</p><br>
                         <p>Description: $dashboardDescription</p>
                     </li>";
