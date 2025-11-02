@@ -4,7 +4,8 @@ namespace App\Requests;
 
 use App\Core\Request;
 use App\Exceptions\ValidationException;
-use App\Validators\RegistrationValidate;
+use App\Models\Dashboard;
+use App\Validators\DashboardValidate;
 
 class DashboardRequest extends Request
 {
@@ -22,7 +23,7 @@ class DashboardRequest extends Request
      */
     public  function doValidate() : void
     {
-        $resultValidate = (new RegistrationValidate())->validate();
+        $resultValidate = (new DashboardValidate())->validate();
 
         if(!$resultValidate) {
             throw new ValidationException('Validation failed');
