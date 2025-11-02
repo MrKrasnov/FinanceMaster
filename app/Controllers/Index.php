@@ -4,15 +4,16 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Requests\CreateDashboardRequest;
+use App\Requests\IndexRequest;
 use App\Requests\LogoutRequest;
 use DomainException;
 use Exception;
 
 class Index extends Controller
 {
-    public function actionIndex()
+    public function actionIndex(IndexRequest $request)
     {
-        $result = $this->model->getFinansesIndex();
+        $result = $this->model->getFinansesIndex($request);
 
         $this->view->renderPage('Home page', $result);
     }

@@ -5,15 +5,16 @@ namespace App\Models;
 use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
 use App\Requests\CreateDashboardRequest;
+use App\Requests\IndexRequest;
 use App\Services\FinanseDashboardManagement\FinanseDashboardManagement;
 use App\Services\UserManagement\UserManagement;
 use DomainException;
 
 class Index extends Model
 {
-    public function getFinansesIndex() : array
+    public function getFinansesIndex(IndexRequest $request) : array
     {
-        $login = $_SESSION['login'] ?? 'user void, ha-ha';
+        $login = $request->getLogin();
 
         $csrfTokenManager = new CsrfTokenManager();
         $csrfTokenManager->generateCSRFToken();
