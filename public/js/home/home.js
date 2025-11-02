@@ -3,36 +3,19 @@ const createNewDashboardBtn = document.querySelector('.create-new-dashboard');
 const popupWindowCreateNewDashboard = document.getElementById("popup-window-create-new-dashboard");
 const popupWindowCreateNewDashboardCross = document.getElementById("popup-window-create-new-dashboard-cross");
 const createDashboardForm = document.getElementById("createDashboardForm");
+const dashboardsCell = document.querySelectorAll('.dashboard-cell');
+
+dashboardsCell.forEach(dashboardCell => {
+    dashboardCell.addEventListener('click', () => {
+        const dashboard_id = dashboardCell.dataset.index
+        window.location.href = "/dashboard?dashboard_id=" + dashboard_id
+    });
+})
 
 logoutBtn.addEventListener('click', function (event) {
     event.preventDefault();
 
-    fetch('/index/logout', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-    .then(async response => {
-        const text = await response.text();
-        let data;
-
-        try {
-            data = JSON.parse(text);
-        } catch (e) {
-            // console.error("Server did not return valid JSON:", text); //for debug!
-            throw new Error("Invalid JSON from server");
-        }
-
-        if (!response.ok) {
-            throw new Error(data.error || 'Unknown server error');
-        }
-
-        window.location.href = '/authentication';
-    }).catch(error => {
-        console.error('Error:', error);
-        alert(error.message);
-    });
+    logoutAction();
 });
 
 createNewDashboardBtn.addEventListener('click', (e) => {

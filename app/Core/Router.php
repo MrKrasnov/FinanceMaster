@@ -39,6 +39,9 @@ class Router
 
         $urlArr = explode('/' , $url);
         $controllerName   = empty($urlArr[0]) ? 'index' : $urlArr[0];
+
+        if(str_contains($controllerName, "?")) $controllerName = strstr($controllerName, '?', true);
+
         $controllerMethod = $urlArr[1] ?? 'index';
         $controllerMethod = 'action' . ucfirst($controllerMethod);
 

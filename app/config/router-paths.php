@@ -14,5 +14,11 @@ return [
         'model'      => 'authentication',
         'view'       => 'authentication',
         'controller' => 'authentication',
+    ],
+    "dashboard" => [
+        'model'      => 'dashboard',
+        'view'       => 'dashboard',
+        'controller' => 'dashboard',
     ]
+
 ];

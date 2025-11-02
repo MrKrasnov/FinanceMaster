@@ -3,10 +3,13 @@
 namespace App\Services\FinanseDashboardManagement;
 
 use App\Core\DB;
+use App\Core\Enum\UserRole;
+use App\Core\Log;
 use App\Dto\Dashboard;
 use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
+use DomainException;
 use Exception;
 use PDO;
 use PDOException;
@@ -19,6 +22,29 @@ class FinanseDashboardManagement
     {
         $db = new DB();
         $this->pdoDB = $db->db;
+    }
+
+    public function findRoleUser(int $userId, int $dashboardId) : UserRole
+    {
+        $selectSqlMember = new SelectQueryBuilder();
+        $selectSqlMember
+            ->select(["members.role_id"])
+            ->from("members")
+            ->where(["user_id" => $userId, "board_id" => $dashboardId]);
+
+        $result = $selectSqlMember->execute($this->pdoDB);
+
+        if(count($result) > 1) {
+            //TODO: save log if record more than 1
+        }
+
+        if(empty($result)) {
+            $messageError = 'UserId ' . $userId . ' don`t found role for dashboardId ' . $dashboardId;
+            Log::writeLog($messageError);
+            throw new DomainException($messageError, 500);
+        }
+
+        return UserRole::from($result[0]['role_id']);
     }
 
     /**

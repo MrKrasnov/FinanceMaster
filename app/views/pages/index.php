@@ -39,10 +39,11 @@
             <ul>
                 <?php
                 foreach($dashboards as $dashboard){
+                    $dashboardId = $dashboard->getId();
                     $dashboardTitle = $dashboard->getTitle();
                     $dashboardDescription = $dashboard->getDescription();
                     echo
-                    "<li>
+                    "<li class='dashboard-cell' data-index='$dashboardId'>
                         <p>Title: $dashboardTitle</p><br>
                         <p>Description: $dashboardDescription</p>
                     </li>";
@@ -52,4 +53,5 @@
         </nav>
     </div>
 </main>
+<script src="/public/js/main.js"></script>
 <script src="/public/js/home/home.js"></script>
