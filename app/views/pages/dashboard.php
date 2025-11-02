@@ -66,6 +66,47 @@ use App\Dto\User;
             </table>
         </div>
     </div>
+
+    <!-- Insert Modal -->
+<!--    TODO: fix hint in popup-->
+    <div class="modal-overlay" id="insert-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title">Добавить запись</h2>
+                <button class="modal-close-btn" id="close-modal" aria-label="Закрыть">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="insert-form" class="insert-form">
+                    <div class="form-group">
+                        <label for="transaction-type" class="form-label">Тип операции</label>
+                        <select id="transaction-type" name="transaction-type" class="form-select" required>
+                            <option value="">Выберите тип</option>
+                            <option value="expense">Расходы</option>
+                            <option value="savings">Сбережения</option>
+                            <option value="withdraw-savings">Съем денег с сбережений</option>
+                            <option value="income">Пополнение</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount" class="form-label">Сумма</label>
+                        <input type="number" id="amount" name="amount" class="form-input" min="0" step="0.01" placeholder="Введите сумму" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="form-label">Категория</label>
+                        <select id="category" name="category" class="form-select" required>
+                            <option value="">Выберите категорию</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancel-btn">Отмена</button>
+                        <button type="submit" class="btn-submit">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
 <script src="/public/js/main.js"></script>
 <script src="/public/js/dashboard/dashboard.js"></script>
