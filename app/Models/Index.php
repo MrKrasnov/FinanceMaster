@@ -30,7 +30,8 @@ class Index extends Model
         $finanseDashboardManagement = new FinanseDashboardManagement();
         $dashboards = $finanseDashboardManagement->findDashboardsByUserId($user->getId());
 
-        return ['login' => $login, "csrfTokenManager" => $csrfTokenManager, "dashboards" => $dashboards];
+
+        return ['login' => $login, "csrfTokenManager" => $csrfTokenManager, "dashboards" => array_reverse($dashboards)];
     }
 
     public function logout()
