@@ -100,6 +100,7 @@ createDashboardForm.addEventListener("submit", (e) => {
 
             alert("Create dashboard successful!");
             popupWindowCreateNewDashboard.classList.add("hidden");
+            location.reload();
         })
         .catch(error => {
             console.error('Error:', error);
