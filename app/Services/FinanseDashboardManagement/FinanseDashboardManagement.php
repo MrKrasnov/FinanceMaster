@@ -21,6 +21,66 @@ class FinanseDashboardManagement
         $this->pdoDB = $db->db;
     }
 
+    /**
+     * @param int $userId
+     * @return array<Dashboard>|null
+     */
+    public function findDashboardsByUserId(int $userId): array
+    {
+        $selectSqlMember = new SelectQueryBuilder();
+
+        $selectSqlMember
+            ->select(["members.board_id"])
+            ->from("members")
+            ->where(["user_id" => $userId]);
+
+        $boardsId = $selectSqlMember->execute($this->pdoDB);
+
+        $board_ids = [];
+        foreach ($boardsId as $boardId) {
+            $board_id = $boardId['board_id'];
+            $board_ids[] = $board_id;
+        }
+
+        $board_ids = array_unique($board_ids);
+
+        if(empty($board_ids)) {
+            return [];
+        }
+
+        return $this->findDashboardByIds($board_ids);
+    }
+
+    /**
+     * @param int $id
+     * @return array<Dashboard>|null
+     */
+    public function findDashboardByIds(array $ids): array
+    {
+        $selectSql = new SelectQueryBuilder();
+        $selectSql
+            ->select(['*'])
+            ->from('boards');
+
+        foreach ($ids as $id) {
+            $selectSql->where(['id' => $id]);
+        }
+
+        $results = $selectSql->execute($this->pdoDB);
+
+        if (!empty($results)) {
+            $resultDashboards = [];
+
+            foreach ($results as $result) {
+                $resultDashboards[] = $this->convertArrayToDashboard($result);
+            }
+
+            return $resultDashboards;
+        }
+
+        return [];
+    }
+
     public function findDashboardById(int $id): ?Dashboard
     {
         $selectSql = new SelectQueryBuilder();
@@ -100,7 +160,7 @@ class FinanseDashboardManagement
         $insertSqlMember
             ->insertInto('members')
             ->setValues([
-                'boards_id' => $dashboardId,
+                'board_id' => $dashboardId,
                 'user_id' => $owner->getId(),
                 'role_id' => 1
             ]);

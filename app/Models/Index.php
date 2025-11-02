@@ -20,7 +20,17 @@ class Index extends Model
         $csrfTokenManager->generateCSRFToken();
         $csrfTokenManager->generateCSRFTokenLifeExpire();
 
-        return ['login' => $login, "csrfTokenManager" => $csrfTokenManager];
+        $userManager = new UserManagement();
+        $user = $userManager->findUserByUsername($login);
+
+        if (!isset($user)) {
+            throw new DomainException("Owner not exist - usename: ". $login, 500);
+        }
+
+        $finanseDashboardManagement = new FinanseDashboardManagement();
+        $dashboards = $finanseDashboardManagement->findDashboardsByUserId($user->getId());
+
+        return ['login' => $login, "csrfTokenManager" => $csrfTokenManager, "dashboards" => $dashboards];
     }
 
     public function logout()

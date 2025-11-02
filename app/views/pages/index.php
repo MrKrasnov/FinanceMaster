@@ -1,5 +1,6 @@
 <?php
 /** @var string $login
+ *  @var array<\App\Dto\Dashboard> $dashboards
  *  @var \App\Core\Manager\CsrfTokenManager $csrfTokenManager
  * */
 ?>
@@ -36,9 +37,17 @@
                 <button class="create-new-dashboard">Create a New Dashboard</button>
             </div>
             <ul>
-                <li>{{Some CSV Graph}}</li>
-                <li>{{Some CSV Graph}}</li>
-                <li>{{Some CSV Graph}}</li>
+                <?php
+                foreach($dashboards as $dashboard){
+                    $dashboardTitle = $dashboard->getTitle();
+                    $dashboardDescription = $dashboard->getDescription();
+                    echo
+                    "<li>
+                        <p>Title: $dashboardTitle</p><br>
+                        <p>Description: $dashboardDescription</p>
+                    </li>";
+                }
+                ?>
             </ul>
         </nav>
     </div>
