@@ -36,7 +36,7 @@ final class SelectQueryBuilder extends QueryBuilder
         if(!str_contains($this->query, "WHERE")){
             $this->query .= " WHERE $whereClause";
         } else {
-            $this->query .= " AND $whereClause";
+            $this->query .= " OR $whereClause";
         }
 
         return $this;
