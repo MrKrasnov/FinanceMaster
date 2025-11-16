@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
+use App\Dto\CreateDashboard;
 use App\Requests\CreateDashboardRequest;
 use App\Requests\IndexRequest;
 use App\Services\FinanseDashboardManagement\FinanseDashboardManagement;
@@ -52,7 +53,13 @@ class Index extends Model
         }
 
         $finanseDashboardManagement = new FinanseDashboardManagement();
-        $dashboard = $finanseDashboardManagement->createDashboard($owner, $request->getNameDashboard(), $request->getDescriptionDashboard());
+        $createDashboardDTO         = new CreateDashboard();
+        $createDashboardDTO
+            ->setOwner($owner)
+            ->setTitle($request->getNameDashboard())
+            ->setDescription($request->getDescriptionDashboard())
+            ->setDenomination($request->getCurrency_denomination());
+        $dashboard = $finanseDashboardManagement->createDashboard($createDashboardDTO);
 
         if (!isset($dashboard)) {
             throw new DomainException("Failed to create dashboard", 500);

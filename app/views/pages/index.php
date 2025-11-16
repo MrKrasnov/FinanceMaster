@@ -1,4 +1,7 @@
 <?php
+
+use App\Core\Enum\Denomination;
+
 /** @var string $login
  *  @var array<\App\Dto\Dashboard> $dashboards
  *  @var \App\Core\Manager\CsrfTokenManager $csrfTokenManager
@@ -23,6 +26,12 @@
             <form id="createDashboardForm">
                 <input type="text" name="title" placeholder="Title: Super dashboard family finance" maxlength="30">
                 <input type="text" name="description" placeholder="Description: + cash + cash + cash = more cash hahaha :)" maxlength="100">
+                <label for="currency-denomination-select">Currency denomination</label>
+                <select id="currency-denomination-select" name="currency_denomination">
+                    <?php foreach (Denomination::cases() as $currency): ?>
+                        <option value="<?= $currency->value ?>"><?= $currency->name ?></option>
+                    <?php endforeach; ?>
+                </select>
                 <input type="hidden" name="owner" value="<?= $login ?>">
                 <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
                 <button type="submit" id="push-for-create-dashboard">Push for create</button>

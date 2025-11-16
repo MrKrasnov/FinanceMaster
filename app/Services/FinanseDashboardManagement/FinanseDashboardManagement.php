@@ -5,6 +5,7 @@ namespace App\Services\FinanseDashboardManagement;
 use App\Core\DB;
 use App\Core\Enum\UserRole;
 use App\Core\Log;
+use App\Dto\CreateDashboard;
 use App\Dto\Dashboard;
 use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
@@ -131,21 +132,21 @@ class FinanseDashboardManagement
     /**
      * @throws Exception
      */
-    public function createDashboard(User $owner, string $title, string $description) : ?Dashboard
+    public function createDashboard(CreateDashboard $createDashboard) : ?Dashboard
     {
         try {
             $this->pdoDB->beginTransaction();
 
-            $dashboardId = $this->_createDashboard($title, $description);
+            $dashboardId = $this->_createDashboard($createDashboard);
 
             if($dashboardId === false) {
-                throw new Exception("error write dashboard $title");
+                throw new Exception("error write dashboard ".$createDashboard->getTitle());
             }
 
-            $memberId = $this->_createMember($dashboardId, $owner, 0);
+            $memberId = $this->_createMember($dashboardId, $createDashboard->getOwner(), 0);
 
             if($memberId === false) {
-                throw new Exception("error write members for dashboard $title");
+                throw new Exception("error write members for dashboard ".$createDashboard->getTitle());
             }
 
             $this->pdoDB->commit();
@@ -201,15 +202,16 @@ class FinanseDashboardManagement
      * @param string $description
      * @return false|string
      */
-    private function _createDashboard(string $title, string $description): string|false
+    private function _createDashboard(CreateDashboard $createDashboard): string|false
     {
         $insertSqlDashboard = new InsertQueryBuilder();
 
         $insertSqlDashboard
             ->insertInto('boards')
             ->setValues([
-                'title' => $title,
-                'description' => $description,
+                'title' => $createDashboard->getTitle(),
+                'description' => $createDashboard->getDescription(),
+                'currency_denomination' => $createDashboard->getDenomination(),
             ]);
 
         $result = $insertSqlDashboard->execute($this->pdoDB);

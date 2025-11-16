@@ -12,13 +12,16 @@ class CreateDashboardRequest extends Request
     private string $nameDashboard;
     private string $descriptionDashboard;
 
+    private int $currency_denomination;
+
     public function setRequestParams(): void
     {
         extract($_POST);
 
         $this->setUsername($owner)
             ->setNameDashboard($title)
-            ->setDescriptionDashboard($description);
+            ->setDescriptionDashboard($description)
+            ->setCurrency_denomination($currency_denomination);
     }
 
     /**
@@ -63,6 +66,17 @@ class CreateDashboardRequest extends Request
     public function setDescriptionDashboard(string $descriptionDashboard): CreateDashboardRequest
     {
         $this->descriptionDashboard = $descriptionDashboard;
+        return $this;
+    }
+
+    public function getCurrency_denomination(): int
+    {
+        return $this->currency_denomination;
+    }
+
+    public function setCurrency_denomination(int $currency_denomination): CreateDashboardRequest
+    {
+        $this->currency_denomination = $currency_denomination;
         return $this;
     }
 }

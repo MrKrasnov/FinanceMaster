@@ -30,7 +30,7 @@ class CreateDashboardValidate extends Validate
             return false;
         }
 
-        $requiredFields = ['owner', 'description', 'title'];
+        $requiredFields = ['owner', 'description', 'title', 'currency_denomination'];
 
         if (!$this->isNotEmptyPostFields($requiredFields)) {
             return false;
