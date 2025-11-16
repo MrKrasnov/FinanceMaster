@@ -14,10 +14,13 @@ const closeModalBtn = document.getElementById("close-modal");
 const cancelBtn = document.getElementById("cancel-btn");
 const insertForm = document.getElementById("insert-form");
 const modalStepType = document.getElementById("modal-step-type");
-const modalStepForm = document.getElementById("modal-step-form");
+
+const modalExpensesForm = document.getElementById("modal-expenses-form");
+const modalSavingsForm = document.getElementById("modal-savings-form");
+const modalSavingsWithdrawalForm = document.getElementById("modal-savingsWithdrawal-form");
+const modalDepositForm = document.getElementById("modal-deposit-form");
+
 const typeButtons = document.querySelectorAll(".type-select-btn");
-const transactionTypeSelect = document.getElementById("transaction-type");
-const typeRecordInput = document.getElementById("type-record");
 
 if (insertBtn && insertModal) {
     insertBtn.addEventListener('click', function (event) {
@@ -40,21 +43,31 @@ if (cancelBtn) {
     });
 }
 
-if (typeButtons && modalStepType && modalStepForm) {
+let isExistModalForm = modalExpensesForm && modalSavingsForm && modalSavingsWithdrawalForm && modalDepositForm;
+
+if (typeButtons && modalStepType && isExistModalForm) {
     typeButtons.forEach(function (button) {
         button.addEventListener('click', function () {
             const typeValue = button.getAttribute('data-type-record');
 
-            if (transactionTypeSelect) {
-                transactionTypeSelect.value = typeValue;
-            }
-
-            if (typeRecordInput) {
-                typeRecordInput.value = typeValue;
+            switch (typeValue) {
+                case "0":
+                    modalExpensesForm.style.display = 'block';
+                    break;
+                case "1":
+                    modalSavingsForm.style.display = 'block';
+                    break;
+                case "2":
+                    modalSavingsWithdrawalForm.style.display = 'block';
+                    break;
+                case "3":
+                    modalDepositForm.style.display = 'block';
+                    break;
+                default:
+                    return;
             }
 
             modalStepType.style.display = 'none';
-            modalStepForm.style.display = 'block';
         });
     });
 }
@@ -78,9 +91,12 @@ function openModal() {
         insertModal.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
 
-        if (modalStepType && modalStepForm) {
+        if (modalStepType && isExistModalForm) {
             modalStepType.style.display = 'block';
-            modalStepForm.style.display = 'none';
+            modalExpensesForm.style.display = 'none';
+            modalSavingsForm.style.display = 'none';
+            modalSavingsWithdrawalForm.style.display = 'none';
+            modalDepositForm.style.display = 'none';
         }
 
         if (insertForm) {
@@ -105,20 +121,20 @@ function closeModal() {
     }
 }
 
-if (insertForm) {
-    insertForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        
-        // Here you can add form submission logic
-        const formData = {
-            type: document.getElementById('transaction-type').value,
-            amount: document.getElementById('amount').value,
-            category: document.getElementById('category').value
-        };
-        
-        console.log('Form data:', formData);
-        
-        // TODO: Implement actual form submission
-        // closeModal();
-    });
-}
+// if (insertForm) {
+//     insertForm.addEventListener('submit', function (event) {
+//         event.preventDefault();
+//
+//         // Here you can add form submission logic
+//         const formData = {
+//             type: document.getElementById('transaction-type').value,
+//             amount: document.getElementById('amount').value,
+//             category: document.getElementById('category').value
+//         };
+//
+//         console.log('Form data:', formData);
+//
+//         // TODO: Implement actual form submission
+//         // closeModal();
+//     });
+// }
