@@ -2,7 +2,6 @@
 
 namespace App\Services\FinanceCategoryManagement;
 
-use App\Core\DB;
 use App\Core\Log;
 use App\Core\Management;
 use App\Dto\Category;
@@ -11,7 +10,6 @@ use App\Services\FinanseDashboardManagement\FinanceDashboardManagement;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
 use Exception;
-use PDO;
 
 class FinanceCategoryManagement extends Management
 {

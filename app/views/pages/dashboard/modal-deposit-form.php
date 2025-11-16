@@ -11,8 +11,7 @@ use App\Dto\User;
 ?>
 <div class="modal-step modal-deposit-form" id="modal-deposit-form" style="display: none;">
 
-
-    <form id="insert-form" class="insert-form">
+    <form id="modal-deposit-insert-form" class="insert-form">
         <h3>Salary, transfers.</h3>
         <div class="form-group">
             <label for="amount" class="form-label">Amount</label>

@@ -450,6 +450,11 @@
     gap: 20px;
 }
 
+.insert-form h3 {
+    font-size: 24px;
+    color: var(--main-text-light-color);
+}
+
 .form-group {
     display: flex;
     flex-direction: column;

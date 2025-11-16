@@ -1,5 +1,5 @@
 <div class="modal-step modal-savingsWithdrawal-form" id="modal-savingsWithdrawal-form" style="display: none;">
-    <form id="insert-form" class="insert-form">
+    <form id="modal-savingsWithdrawal-insert-form" class="insert-form">
 
         <div class="form-group">
             <label for="amount" class="form-label">Amount</label>

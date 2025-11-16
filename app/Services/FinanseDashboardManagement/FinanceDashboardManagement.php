@@ -2,7 +2,6 @@
 
 namespace App\Services\FinanseDashboardManagement;
 
-use App\Core\DB;
 use App\Core\Enum\TypeRecord;
 use App\Core\Enum\UserRole;
 use App\Core\Log;
@@ -16,7 +15,6 @@ use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
 use DomainException;
 use Exception;
-use PDO;
 use PDOException;
 
 class FinanceDashboardManagement extends Management

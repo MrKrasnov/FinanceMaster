@@ -12,13 +12,17 @@ const insertBtn = document.querySelector(".insert-btn");
 const insertModal = document.getElementById("insert-modal");
 const closeModalBtn = document.getElementById("close-modal");
 const cancelBtn = document.getElementById("cancel-btn");
-const insertForm = document.getElementById("insert-form");
 const modalStepType = document.getElementById("modal-step-type");
 
 const modalExpensesForm = document.getElementById("modal-expenses-form");
 const modalSavingsForm = document.getElementById("modal-savings-form");
 const modalSavingsWithdrawalForm = document.getElementById("modal-savingsWithdrawal-form");
 const modalDepositForm = document.getElementById("modal-deposit-form");
+
+const modalExpensesInsertForm = document.getElementById("modal-expenses-insert-form");
+const modalSavingsInsertForm = document.getElementById("modal-savings-insert-form");
+const modalSavingsWithdrawalInsertForm = document.getElementById("modal-savingsWithdrawal-insert-form");
+const modalDepositInsertForm = document.getElementById("modal-deposit-insert-form");
 
 const typeButtons = document.querySelectorAll(".type-select-btn");
 
@@ -122,20 +126,30 @@ function collapseStateForModalForm() {
     }
 }
 
-// if (insertForm) {
-//     insertForm.addEventListener('submit', function (event) {
-//         event.preventDefault();
-//
-//         // Here you can add form submission logic
-//         const formData = {
-//             type: document.getElementById('transaction-type').value,
-//             amount: document.getElementById('amount').value,
-//             category: document.getElementById('category').value
-//         };
-//
-//         console.log('Form data:', formData);
-//
-//         // TODO: Implement actual form submission
-//         // closeModal();
-//     });
-// }
+if (modalExpensesInsertForm) {
+    modalExpensesInsertForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+    });
+}
+
+if (modalSavingsInsertForm) {
+    modalSavingsInsertForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+    });
+}
+
+if (modalSavingsWithdrawalInsertForm) {
+    modalSavingsWithdrawalInsertForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+    });
+}
+
+if (modalDepositInsertForm) {
+    modalDepositInsertForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+    });
+}

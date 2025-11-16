@@ -2,14 +2,12 @@
 
 namespace App\Services\UserManagement;
 
-use App\Core\DB;
 use App\Core\Management;
 use App\Core\Manager\SessionTokenManager;
 use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
 use DomainException;
-use PDO;
 
 class UserManagement extends Management
 {
