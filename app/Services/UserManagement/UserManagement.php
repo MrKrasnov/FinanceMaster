@@ -3,6 +3,7 @@
 namespace App\Services\UserManagement;
 
 use App\Core\DB;
+use App\Core\Management;
 use App\Core\Manager\SessionTokenManager;
 use App\Dto\User;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
@@ -10,16 +11,8 @@ use App\Services\SQLQueryBuilder\SelectQueryBuilder;
 use DomainException;
 use PDO;
 
-class UserManagement
+class UserManagement extends Management
 {
-    private PDO $pdoDB;
-    
-    public function __construct()
-    {
-        $db = new DB();
-        $this->pdoDB = $db->db;
-    }
-
     public function logout(): void
     {
         //Note: in future we will use cookie for auth 

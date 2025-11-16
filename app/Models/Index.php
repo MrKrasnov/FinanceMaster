@@ -7,7 +7,7 @@ use App\Core\Model;
 use App\Dto\CreateDashboard;
 use App\Requests\CreateDashboardRequest;
 use App\Requests\IndexRequest;
-use App\Services\FinanseDashboardManagement\FinanseDashboardManagement;
+use App\Services\FinanseDashboardManagement\FinanceDashboardManagement;
 use App\Services\UserManagement\UserManagement;
 use DomainException;
 
@@ -28,7 +28,7 @@ class Index extends Model
             throw new DomainException("User not exist - username: ". $login, 500);
         }
 
-        $finanseDashboardManagement = new FinanseDashboardManagement();
+        $finanseDashboardManagement = new FinanceDashboardManagement();
         $dashboards = $finanseDashboardManagement->findDashboardsByUserId($user->getId());
 
         return ['login' => $login, "csrfTokenManager" => $csrfTokenManager, "dashboards" => array_reverse($dashboards)];
@@ -52,7 +52,7 @@ class Index extends Model
             throw new DomainException("Owner not exist - username: ". $request->getUsername(), 500);
         }
 
-        $finanseDashboardManagement = new FinanseDashboardManagement();
+        $finanseDashboardManagement = new FinanceDashboardManagement();
         $createDashboardDTO         = new CreateDashboard();
         $createDashboardDTO
             ->setOwner($owner)

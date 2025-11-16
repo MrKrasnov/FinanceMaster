@@ -3,11 +3,15 @@
 namespace App\Services\FinanseDashboardManagement;
 
 use App\Core\DB;
+use App\Core\Enum\TypeRecord;
 use App\Core\Enum\UserRole;
 use App\Core\Log;
+use App\Core\Management;
+use App\Dto\CreateCategory;
 use App\Dto\CreateDashboard;
 use App\Dto\Dashboard;
 use App\Dto\User;
+use App\Services\FinanceCategoryManagement\FinanceCategoryManagement;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;
 use DomainException;
@@ -15,16 +19,8 @@ use Exception;
 use PDO;
 use PDOException;
 
-class FinanseDashboardManagement
+class FinanceDashboardManagement extends Management
 {
-    private PDO $pdoDB;
-
-    public function __construct()
-    {
-        $db = new DB();
-        $this->pdoDB = $db->db;
-    }
-
     public function findRoleUser(int $userId, int $dashboardId) : UserRole
     {
         $selectSqlMember = new SelectQueryBuilder();
@@ -120,7 +116,7 @@ class FinanseDashboardManagement
 
         if (!empty($result)) {
             if(count($result) > 1) {
-                //TODO: save log if dashboard record more than 1
+                Log::writeLog("Found dashbord more than one in findDashboardById. Check id $id");
             }
 
             return $this->convertArrayToDashboard($result[0]);
@@ -143,10 +139,24 @@ class FinanseDashboardManagement
                 throw new Exception("error write dashboard ".$createDashboard->getTitle());
             }
 
-            $memberId = $this->_createMember($dashboardId, $createDashboard->getOwner(), 0);
+            $memberId = $this->_createMember($dashboardId, $createDashboard->getOwner(), UserRole::Owner->value);
 
             if($memberId === false) {
                 throw new Exception("error write members for dashboard ".$createDashboard->getTitle());
+            }
+
+            $createCategoryDTO = new CreateCategory();
+            $createCategoryDTO
+                ->setDashboardId($dashboardId)
+                ->setName("Deposit")
+                ->setLogoUrl("/public/img/category_icons/deposit.png")
+                ->setTypeRecord(TypeRecord::Deposit->value);
+
+            $financeCategoryManagement = new FinanceCategoryManagement($this->pdoDB);
+            $category = $financeCategoryManagement->createCategory($createCategoryDTO, true);
+
+            if(!isset($category)) {
+                throw new Exception("error write category for dashboard ".$createCategoryDTO->getName());
             }
 
             $this->pdoDB->commit();
@@ -178,6 +188,7 @@ class FinanseDashboardManagement
     /**
      * @param string $dashboardId
      * @param User $owner
+     * @param int $role_id
      * @return false|string
      */
     private function _createMember(string $dashboardId, User $owner, int $role_id): string|false

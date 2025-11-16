@@ -4,14 +4,14 @@ namespace App\Models;
 
 use App\Core\Model;
 use App\Requests\DashboardRequest;
-use App\Services\FinanseDashboardManagement\FinanseDashboardManagement;
+use App\Services\FinanseDashboardManagement\FinanceDashboardManagement;
 use App\Services\UserManagement\UserManagement;
 
 class Dashboard extends Model
 {
     public function getDashboardIndex(DashboardRequest $request) : array
     {
-        $finanseDashboardManagement = new FinanseDashboardManagement();
+        $finanseDashboardManagement = new FinanceDashboardManagement();
         $dashboard = $finanseDashboardManagement->findDashboardById($request->getDashboardId());
 
         $userManager = new UserManagement();
