@@ -91,13 +91,7 @@ function openModal() {
         insertModal.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
 
-        if (modalStepType && isExistModalForm) {
-            modalStepType.style.display = 'block';
-            modalExpensesForm.style.display = 'none';
-            modalSavingsForm.style.display = 'none';
-            modalSavingsWithdrawalForm.style.display = 'none';
-            modalDepositForm.style.display = 'none';
-        }
+        collapseStateForModalForm()
 
         if (insertForm) {
             insertForm.reset();
@@ -110,14 +104,21 @@ function closeModal() {
         insertModal.classList.remove('active');
         document.body.style.overflow = ''; // Restore scrolling
 
-        if (modalStepType && modalStepForm) {
-            modalStepType.style.display = 'block';
-            modalStepForm.style.display = 'none';
-        }
+        collapseStateForModalForm()
 
         if (insertForm) {
             insertForm.reset();
         }
+    }
+}
+
+function collapseStateForModalForm() {
+    if (modalStepType && isExistModalForm) {
+        modalStepType.style.display = 'block';
+        modalExpensesForm.style.display = 'none';
+        modalSavingsForm.style.display = 'none';
+        modalSavingsWithdrawalForm.style.display = 'none';
+        modalDepositForm.style.display = 'none';
     }
 }
 
