@@ -15,4 +15,7 @@ enum TypeRecord : int
 
     // Deposit: Money credited to the main account (e.g., salary, top-up, incoming transfer).
     case Deposit = 3;
+
+    // Convert Denomination: Always negative. Shows conversion costs.
+    case ConvertDenomination = 4;
 }

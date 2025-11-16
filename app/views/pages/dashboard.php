@@ -68,42 +68,106 @@ use App\Dto\User;
     </div>
 
     <!-- Insert Modal -->
-<!--    TODO: fix hint in popup-->
+    <!--    TODO: fix hint in popup-->
     <div class="modal-overlay" id="insert-modal">
         <div class="modal-container">
             <div class="modal-header">
-                <h2 class="modal-title">Добавить запись</h2>
+                <h2 class="modal-title">Add new record</h2>
                 <button class="modal-close-btn" id="close-modal" aria-label="Закрыть">
                     <span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="insert-form" class="insert-form">
-                    <div class="form-group">
-                        <label for="transaction-type" class="form-label">Тип операции</label>
-                        <select id="transaction-type" name="transaction-type" class="form-select" required>
-                            <option value="">Выберите тип</option>
-                            <option value="expense">Расходы</option>
-                            <option value="savings">Сбережения</option>
-                            <option value="withdraw-savings">Съем денег с сбережений</option>
-                            <option value="income">Пополнение</option>
-                        </select>
+                <div class="modal-step modal-step-type" id="modal-step-type">
+                    <p class="modal-hint">Select the type of financial operation:</p>
+                    <div class="type-select-grid">
+                        <button
+                            type="button"
+                            class="type-select-btn type-select-expenses"
+                            data-type-record="0"
+                        >
+                            <span class="type-select-title">Expenses</span>
+                            <span class="type-select-subtitle">Purchases, payments, bills</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="type-select-btn type-select-deposit"
+                            data-type-record="3"
+                        >
+                            <span class="type-select-title">Deposit</span>
+                            <span class="type-select-subtitle">Salary, transfers, deposits</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="type-select-btn type-select-savings"
+                            data-type-record="1"
+                        >
+                            <span class="type-select-title">Savings</span>
+                            <span class="type-select-subtitle">Transfer to savings</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="type-select-btn type-select-savings-withdrawal"
+                            data-type-record="2"
+                        >
+                            <span class="type-select-title">Withdrawal from savings</span>
+                            <span class="type-select-subtitle">Reverse transfer from savings</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="amount" class="form-label">Сумма</label>
-                        <input type="number" id="amount" name="amount" class="form-input" min="0" step="0.01" placeholder="Введите сумму" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="category" class="form-label">Категория</label>
-                        <select id="category" name="category" class="form-select" required>
-                            <option value="">Выберите категорию</option>
-                        </select>
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-cancel" id="cancel-btn">Отмена</button>
-                        <button type="submit" class="btn-submit">Сохранить</button>
-                    </div>
-                </form>
+                </div>
+
+
+                <!--TODO: change form for insert record-->
+                <div class="modal-step modal-step-form" id="modal-step-form" style="display: none;">
+                    <form id="insert-form" class="insert-form">
+                        <input type="hidden" id="type-record" name="type_record" value="">
+
+                        <div class="form-group">
+                            <label for="transaction-type" class="form-label">Type of operation</label>
+                            <select id="transaction-type" name="transaction_type" class="form-select" disabled>
+                                <option value="0">Expenses</option>
+                                <option value="3">Deposit</option>
+                                <option value="1">Savings</option>
+                                <option value="2">Withdrawal from savings</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount" class="form-label">Amount</label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                min="0"
+                                id="amount"
+                                name="amount"
+                                class="form-input"
+                                placeholder="Enter the amount"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category" class="form-label">Category</label>
+                            <input
+                                type="text"
+                                id="category"
+                                name="category"
+                                class="form-input"
+                                placeholder="For example: Products, Rent, Salary"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-cancel" id="cancel-btn">Cancel</button>
+                            <button type="submit" class="btn-submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+                <!------------------------------------------->
             </div>
         </div>
     </div>
