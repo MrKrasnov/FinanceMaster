@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-actions">
-            <button type="button" class="btn-cancel" id="cancel-btn">Back</button>
+            <button type="button" class="btn-cancel cancel-btn" id="cancel-btn">Back</button>
             <button type="submit" class="btn-submit">Add</button>
         </div>
     </form>

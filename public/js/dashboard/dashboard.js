@@ -11,8 +11,9 @@ if (logoutBtn) {
 const insertBtn = document.querySelector(".insert-btn");
 const insertModal = document.getElementById("insert-modal");
 const closeModalBtn = document.getElementById("close-modal");
-const cancelBtn = document.getElementById("cancel-btn");
 const modalStepType = document.getElementById("modal-step-type");
+
+const cancelBtns = document.querySelectorAll(".cancel-btn");
 
 const modalExpensesForm = document.getElementById("modal-expenses-form");
 const modalSavingsForm = document.getElementById("modal-savings-form");
@@ -35,13 +36,6 @@ if (insertBtn && insertModal) {
 
 if (closeModalBtn) {
     closeModalBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-        closeModal();
-    });
-}
-
-if (cancelBtn) {
-    cancelBtn.addEventListener('click', function (event) {
         event.preventDefault();
         closeModal();
     });
@@ -97,9 +91,10 @@ function openModal() {
 
         collapseStateForModalForm()
 
-        if (insertForm) {
-            insertForm.reset();
-        }
+        //TODO: maybe should reset for all forms ?
+        // if (insertForm) {
+        //     insertForm.reset();
+        // }
     }
 }
 
@@ -110,9 +105,10 @@ function closeModal() {
 
         collapseStateForModalForm()
 
-        if (insertForm) {
-            insertForm.reset();
-        }
+        //TODO: maybe should reset for all forms ?
+        // if (insertForm) {
+        //     insertForm.reset();
+        // }
     }
 }
 
@@ -124,6 +120,15 @@ function collapseStateForModalForm() {
         modalSavingsWithdrawalForm.style.display = 'none';
         modalDepositForm.style.display = 'none';
     }
+}
+
+if(cancelBtns) {
+    cancelBtns.forEach(cancelBtn => {
+        cancelBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            collapseStateForModalForm();
+        })
+    })
 }
 
 if (modalExpensesInsertForm) {
@@ -150,6 +155,54 @@ if (modalSavingsWithdrawalInsertForm) {
 if (modalDepositInsertForm) {
     modalDepositInsertForm.addEventListener('submit', function (event) {
         event.preventDefault();
+
+        const formData = new FormData(modalDepositInsertForm);
+
+        for (const [name, value] of formData.entries()) {
+            if (!value.trim()) {
+                alert(`The field "${name}" is required and cannot be empty.`);
+                return;
+            }
+        }
+
+        fetch('/dashboard/insertDeposit', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(async response => {
+                const text = await response.text();
+                let data;
+
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    // console.error("Server did not return valid JSON:", text); //for debug!
+                    throw new Error("Invalid JSON from server");
+                }
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Unknown server error');
+                }
+
+                let id = data.data.id ?? null
+                if (id) {
+                    console.log('Created record: ' + id)
+                }
+
+                alert("Create record successful!");
+                closeModal()
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                if (error.code === 409) {
+                    alert(error);
+                } else {
+                    alert("Something went wrong during registration.");
+                }
+            });
 
     });
 }

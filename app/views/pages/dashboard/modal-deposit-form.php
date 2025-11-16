@@ -2,9 +2,11 @@
 /** @var User $user
  *  @var Dashboard $dashboard
  *  @var UserRole $role
+ *  @var CsrfTokenManager $csrfTokenManager
  * */
 
 use App\Core\Enum\UserRole;
+use App\Core\Manager\CsrfTokenManager;
 use App\Dto\Dashboard;
 use App\Dto\User;
 
@@ -29,9 +31,11 @@ use App\Dto\User;
 
         <input type="hidden" name="by_user" value="<?=$user->getLogin()?>">
         <input type="hidden" name="category" value="Deposit">
+        <input type="hidden" name="board_id" value="<?=$dashboard->getId()?>">
+        <input type="hidden" name="<?= $csrfTokenManager->csrfTokenNameKey ?>" value="<?= $csrfTokenManager->csrfToken ?>">
 
         <div class="form-actions">
-            <button type="button" class="btn-cancel" id="cancel-btn">Back</button>
+            <button type="button" class="btn-cancel cancel-btn" id="cancel-btn">Back</button>
             <button type="submit" class="btn-submit">Add</button>
         </div>
     </form>

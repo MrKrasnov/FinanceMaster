@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
 use App\Requests\DashboardRequest;
 use App\Services\FinanseDashboardManagement\FinanceDashboardManagement;
@@ -11,6 +12,10 @@ class Dashboard extends Model
 {
     public function getDashboardIndex(DashboardRequest $request) : array
     {
+        $csrfTokenManager = new CsrfTokenManager();
+        $csrfTokenManager->generateCSRFToken();
+        $csrfTokenManager->generateCSRFTokenLifeExpire();
+
         $finanseDashboardManagement = new FinanceDashboardManagement();
         $dashboard = $finanseDashboardManagement->findDashboardById($request->getDashboardId());
 
@@ -19,6 +24,6 @@ class Dashboard extends Model
 
         $roleUser = $finanseDashboardManagement->findRoleUser($user->getId(), $dashboard->getId());
 
-        return ["dashboard" => $dashboard, "user" => $user, "role" => $roleUser];
+        return ["dashboard" => $dashboard, "user" => $user, "role" => $roleUser, 'csrfTokenManager' => $csrfTokenManager];
     }
 }
