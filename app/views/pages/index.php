@@ -3,7 +3,7 @@
 use App\Core\Enum\Denomination;
 
 /** @var string $login
- *  @var array<\App\Dto\Dashboard> $dashboards
+ *  @var array<\App\Dto\Dashboard\Dashboard> $dashboards
  *  @var \App\Core\Manager\CsrfTokenManager $csrfTokenManager
  * */
 ?>

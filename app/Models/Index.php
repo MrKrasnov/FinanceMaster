@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
-use App\Dto\CreateDashboard;
+use App\Dto\Dashboard\CreateDashboard;
 use App\Requests\CreateDashboardRequest;
 use App\Requests\IndexRequest;
 use App\Services\FinanseDashboardManagement\FinanceDashboardManagement;

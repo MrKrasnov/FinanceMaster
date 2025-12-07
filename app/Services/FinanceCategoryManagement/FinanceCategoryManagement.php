@@ -4,8 +4,8 @@ namespace App\Services\FinanceCategoryManagement;
 
 use App\Core\Log;
 use App\Core\Management;
-use App\Dto\Category;
-use App\Dto\CreateCategory;
+use App\Dto\Category\Category;
+use App\Dto\Category\CreateCategory;
 use App\Services\FinanseDashboardManagement\FinanceDashboardManagement;
 use App\Services\SQLQueryBuilder\InsertQueryBuilder;
 use App\Services\SQLQueryBuilder\SelectQueryBuilder;

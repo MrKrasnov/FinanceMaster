@@ -6,7 +6,7 @@ use App\Core\Enum\TypeRecord;
 use App\Core\Log;
 use App\Core\Manager\CsrfTokenManager;
 use App\Core\Model;
-use App\Dto\CreateCategory;
+use App\Dto\Category\CreateCategory;
 use App\Dto\Records\CreateRecord;
 use App\Requests\DashboardRequest;
 use App\Requests\InsertDepositRequest;

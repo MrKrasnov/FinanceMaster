@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Dto;
+namespace App\Dto\Dashboard;
+
+use App\Dto\User;
 
 class CreateDashboard
 {

@@ -1,13 +1,13 @@
 <?php
 /** @var User $user
- *  @var Dashboard $dashboard
+ *  @var \App\Dto\Dashboard\Dashboard $dashboard
  *  @var UserRole $role
  *  @var CsrfTokenManager $csrfTokenManager
  * */
 
 use App\Core\Enum\UserRole;
 use App\Core\Manager\CsrfTokenManager;
-use App\Dto\Dashboard;
+use App\Dto\Dashboard\Dashboard;
 use App\Dto\User;
 
 ?>
