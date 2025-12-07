@@ -134,21 +134,21 @@ if(cancelBtns) {
 if (modalExpensesInsertForm) {
     modalExpensesInsertForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
+        //TODO: develop ExpensesInsertForm event
     });
 }
 
 if (modalSavingsInsertForm) {
     modalSavingsInsertForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
+        //TODO: develop SavingsInsertForm event
     });
 }
 
 if (modalSavingsWithdrawalInsertForm) {
     modalSavingsWithdrawalInsertForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
+        //TODO: develop SavingsWithdrawalInsertForm event
     });
 }
 
