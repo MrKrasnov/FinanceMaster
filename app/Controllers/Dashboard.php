@@ -25,7 +25,7 @@ class Dashboard extends Controller
 
     public function actionInsertDeposit(InsertDepositRequest $request) {
         try {
-            $idRecord = 1;
+            $idRecord = $this->model->createRecordDeposit($request);
             $this->view->renderJsonResponse(201, ['id' => $idRecord]);
         }
         catch (DomainException $exception) {
