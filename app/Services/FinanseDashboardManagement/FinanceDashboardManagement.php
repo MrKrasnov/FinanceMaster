@@ -30,7 +30,7 @@ class FinanceDashboardManagement extends Management
         $result = $selectSqlMember->execute($this->pdoDB);
 
         if(count($result) > 1) {
-            //TODO: save log if record more than 1
+            Log::writeLog("Found role user more than one in findRoleUser. Check userID $userId");
         }
 
         if(empty($result)) {
